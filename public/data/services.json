@@ -1,0 +1,932 @@
+[
+  {
+    "id": "lambda",
+    "prefix": "AWS",
+    "name": "Lambda",
+    "fullName": "AWS Lambda",
+    "category": "compute",
+    "descriptionJa": "サーバーを管理せずにコードを実行できるサーバーレスコンピューティングサービス。",
+    "descriptionEn": "Run code without provisioning or managing servers.",
+    "icon": "lambda.svg"
+  },
+  {
+    "id": "ec2",
+    "prefix": "Amazon",
+    "name": "EC2",
+    "fullName": "Amazon EC2",
+    "category": "compute",
+    "descriptionJa": "クラウド上で仮想サーバー（インスタンス）を起動・管理できるサービス。",
+    "descriptionEn": "Virtual servers in the cloud — launch, configure, and scale compute capacity.",
+    "icon": "ec2.svg"
+  },
+  {
+    "id": "elastic-beanstalk",
+    "prefix": "AWS",
+    "name": "Elastic Beanstalk",
+    "fullName": "AWS Elastic Beanstalk",
+    "category": "compute",
+    "descriptionJa": "アプリのデプロイ・スケーリングをインフラ管理なしで行えるPaaSサービス。",
+    "descriptionEn": "Deploy and scale web applications without managing the underlying infrastructure.",
+    "icon": "elastic-beanstalk.svg"
+  },
+  {
+    "id": "ecs",
+    "prefix": "Amazon",
+    "name": "ECS",
+    "fullName": "Amazon ECS",
+    "category": "compute",
+    "descriptionJa": "コンテナのデプロイ・管理・スケーリングを簡単に行えるコンテナオーケストレーションサービス。",
+    "descriptionEn": "Highly scalable container orchestration service to run Docker containers.",
+    "icon": "ecs.svg"
+  },
+  {
+    "id": "eks",
+    "prefix": "Amazon",
+    "name": "EKS",
+    "fullName": "Amazon EKS",
+    "category": "compute",
+    "descriptionJa": "Kubernetesクラスターをマネージドで運用できるサービス。コントロールプレーンの管理不要。",
+    "descriptionEn": "Managed Kubernetes service — run Kubernetes without managing the control plane.",
+    "icon": "eks.svg"
+  },
+  {
+    "id": "fargate",
+    "prefix": "AWS",
+    "name": "Fargate",
+    "fullName": "AWS Fargate",
+    "category": "compute",
+    "descriptionJa": "サーバー管理不要でコンテナを実行できるサーバーレスコンピューティングエンジン（ECS/EKS向け）。",
+    "descriptionEn": "Serverless compute engine for containers — no servers to provision or manage.",
+    "icon": "fargate.svg"
+  },
+  {
+    "id": "batch",
+    "prefix": "AWS",
+    "name": "Batch",
+    "fullName": "AWS Batch",
+    "category": "compute",
+    "descriptionJa": "数十万件のバッチコンピューティングジョブを効率的に実行できるフルマネージドサービス。",
+    "descriptionEn": "Fully managed batch computing service for running hundreds of thousands of jobs.",
+    "icon": "batch.svg"
+  },
+  {
+    "id": "lightsail",
+    "prefix": "Amazon",
+    "name": "Lightsail",
+    "fullName": "Amazon Lightsail",
+    "category": "compute",
+    "descriptionJa": "シンプルな仮想プライベートサーバー（VPS）サービス。初心者向けの簡単なクラウド環境。",
+    "descriptionEn": "Easy-to-use virtual private servers, storage, databases, and networking at a low cost.",
+    "icon": "lightsail.svg"
+  },
+  {
+    "id": "app-runner",
+    "prefix": "AWS",
+    "name": "App Runner",
+    "fullName": "AWS App Runner",
+    "category": "compute",
+    "descriptionJa": "コードやコンテナイメージから直接Webアプリをデプロイできるフルマネージドサービス。",
+    "descriptionEn": "Deploy containerized web apps and APIs at scale without managing infrastructure.",
+    "icon": "app-runner.svg"
+  },
+  {
+    "id": "outposts",
+    "prefix": "AWS",
+    "name": "Outposts",
+    "fullName": "AWS Outposts",
+    "category": "compute",
+    "descriptionJa": "AWSのインフラとサービスをオンプレミスに拡張するハイブリッドクラウドサービス。",
+    "descriptionEn": "Bring AWS infrastructure and services to virtually any on-premises location.",
+    "icon": "outposts.svg"
+  },
+  {
+    "id": "s3",
+    "prefix": "Amazon",
+    "name": "S3",
+    "fullName": "Amazon S3",
+    "category": "storage",
+    "descriptionJa": "スケーラブルでオブジェクト単位でデータを保管できるクラウドストレージサービス。",
+    "descriptionEn": "Object storage built to store and retrieve any amount of data from anywhere.",
+    "icon": "s3.svg"
+  },
+  {
+    "id": "ebs",
+    "prefix": "Amazon",
+    "name": "EBS",
+    "fullName": "Amazon EBS",
+    "category": "storage",
+    "descriptionJa": "EC2インスタンスに接続して使用するブロックストレージボリュームサービス。",
+    "descriptionEn": "Block storage volumes for use with Amazon EC2 instances.",
+    "icon": "ebs.svg"
+  },
+  {
+    "id": "efs",
+    "prefix": "Amazon",
+    "name": "EFS",
+    "fullName": "Amazon EFS",
+    "category": "storage",
+    "descriptionJa": "複数のEC2インスタンスから同時アクセスできるマネージドNFSファイルシステム。",
+    "descriptionEn": "Scalable, elastic, cloud-native NFS file system for Linux-based workloads.",
+    "icon": "efs.svg"
+  },
+  {
+    "id": "fsx",
+    "prefix": "Amazon",
+    "name": "FSx",
+    "fullName": "Amazon FSx",
+    "category": "storage",
+    "descriptionJa": "Windows File ServerやLustreなどのサードパーティファイルシステムをマネージドで提供するサービス。",
+    "descriptionEn": "Fully managed file storage built on popular file systems like Windows File Server and Lustre.",
+    "icon": "fsx.svg"
+  },
+  {
+    "id": "storage-gateway",
+    "prefix": "AWS",
+    "name": "Storage Gateway",
+    "fullName": "AWS Storage Gateway",
+    "category": "storage",
+    "descriptionJa": "オンプレミスとAWSクラウドストレージをシームレスに統合するハイブリッドストレージサービス。",
+    "descriptionEn": "Hybrid cloud storage service that gives on-premises applications access to cloud storage.",
+    "icon": "storage-gateway.svg"
+  },
+  {
+    "id": "backup",
+    "prefix": "AWS",
+    "name": "Backup",
+    "fullName": "AWS Backup",
+    "category": "storage",
+    "descriptionJa": "AWSサービスのバックアップを一元管理・自動化できるフルマネージドサービス。",
+    "descriptionEn": "Centrally manage and automate backups across AWS services.",
+    "icon": "backup.svg"
+  },
+  {
+    "id": "datasync",
+    "prefix": "AWS",
+    "name": "DataSync",
+    "fullName": "AWS DataSync",
+    "category": "storage",
+    "descriptionJa": "オンプレミスとAWS間でデータを高速・安全に転送できるオンラインデータ移動サービス。",
+    "descriptionEn": "Automated data transfer service to move data between on-premises storage and AWS.",
+    "icon": "datasync.svg"
+  },
+  {
+    "id": "snowball",
+    "prefix": "AWS",
+    "name": "Snowball",
+    "fullName": "AWS Snowball",
+    "category": "storage",
+    "descriptionJa": "ペタバイト規模のデータをAWSへ物理的に転送するためのデバイスサービス。",
+    "descriptionEn": "Physical device to transport petabytes of data to and from AWS offline.",
+    "icon": "snowball.svg"
+  },
+  {
+    "id": "rds",
+    "prefix": "Amazon",
+    "name": "RDS",
+    "fullName": "Amazon RDS",
+    "category": "database",
+    "descriptionJa": "MySQL、PostgreSQL、Oracle等のリレーショナルデータベースをマネージドで提供するサービス。",
+    "descriptionEn": "Managed relational database service supporting MySQL, PostgreSQL, Oracle, and more.",
+    "icon": "rds.svg"
+  },
+  {
+    "id": "aurora",
+    "prefix": "Amazon",
+    "name": "Aurora",
+    "fullName": "Amazon Aurora",
+    "category": "database",
+    "descriptionJa": "MySQLおよびPostgreSQL互換のクラウドネイティブリレーショナルデータベース。高性能・高可用性。",
+    "descriptionEn": "MySQL and PostgreSQL-compatible relational database built for the cloud with 5x MySQL performance.",
+    "icon": "aurora.svg"
+  },
+  {
+    "id": "dynamodb",
+    "prefix": "Amazon",
+    "name": "DynamoDB",
+    "fullName": "Amazon DynamoDB",
+    "category": "database",
+    "descriptionJa": "ミリ秒単位の応答速度と無制限のスケーラビリティを持つフルマネージドNoSQLデータベース。",
+    "descriptionEn": "Fully managed, serverless NoSQL database with single-digit millisecond performance at any scale.",
+    "icon": "dynamodb.svg"
+  },
+  {
+    "id": "elasticache",
+    "prefix": "Amazon",
+    "name": "ElastiCache",
+    "fullName": "Amazon ElastiCache",
+    "category": "database",
+    "descriptionJa": "RedisまたはMemcachedを使ったインメモリキャッシングサービス。データベースの負荷軽減に活用。",
+    "descriptionEn": "In-memory caching service compatible with Redis and Memcached to accelerate application performance.",
+    "icon": "elasticache.svg"
+  },
+  {
+    "id": "neptune",
+    "prefix": "Amazon",
+    "name": "Neptune",
+    "fullName": "Amazon Neptune",
+    "category": "database",
+    "descriptionJa": "グラフデータを管理するためのフルマネージドグラフデータベースサービス。",
+    "descriptionEn": "Fast, reliable, fully managed graph database service for highly connected datasets.",
+    "icon": "neptune.svg"
+  },
+  {
+    "id": "documentdb",
+    "prefix": "Amazon",
+    "name": "DocumentDB",
+    "fullName": "Amazon DocumentDB",
+    "category": "database",
+    "descriptionJa": "MongoDBと互換性のあるフルマネージドドキュメントデータベースサービス。",
+    "descriptionEn": "Fully managed document database service that is MongoDB-compatible.",
+    "icon": "documentdb.svg"
+  },
+  {
+    "id": "keyspaces",
+    "prefix": "Amazon",
+    "name": "Keyspaces",
+    "fullName": "Amazon Keyspaces",
+    "category": "database",
+    "descriptionJa": "Apache Cassandraと互換性のあるフルマネージドワイドカラムデータベースサービス。",
+    "descriptionEn": "Managed Apache Cassandra-compatible database service.",
+    "icon": "keyspaces.svg"
+  },
+  {
+    "id": "qldb",
+    "prefix": "Amazon",
+    "name": "QLDB",
+    "fullName": "Amazon QLDB",
+    "category": "database",
+    "descriptionJa": "改ざん不可能なトランザクションログを持つフルマネージド台帳データベースサービス。",
+    "descriptionEn": "Fully managed ledger database that provides a transparent, immutable transaction log.",
+    "icon": "qldb.svg"
+  },
+  {
+    "id": "timestream",
+    "prefix": "Amazon",
+    "name": "Timestream",
+    "fullName": "Amazon Timestream",
+    "category": "database",
+    "descriptionJa": "IoTや運用アプリケーション向けのフルマネージド時系列データベースサービス。",
+    "descriptionEn": "Fast, scalable, serverless time series database for IoT and operational applications.",
+    "icon": "timestream.svg"
+  },
+  {
+    "id": "redshift",
+    "prefix": "Amazon",
+    "name": "Redshift",
+    "fullName": "Amazon Redshift",
+    "category": "analytics",
+    "descriptionJa": "ペタバイト規模のデータウェアハウスサービス。BIツールとの連携に優れる。",
+    "descriptionEn": "Fast, fully managed cloud data warehouse for analyzing data using standard SQL.",
+    "icon": "redshift.svg"
+  },
+  {
+    "id": "athena",
+    "prefix": "Amazon",
+    "name": "Athena",
+    "fullName": "Amazon Athena",
+    "category": "analytics",
+    "descriptionJa": "S3上のデータを標準SQLでクエリできるサーバーレスのインタラクティブクエリサービス。",
+    "descriptionEn": "Serverless interactive query service to analyze data in Amazon S3 using standard SQL.",
+    "icon": "athena.svg"
+  },
+  {
+    "id": "emr",
+    "prefix": "Amazon",
+    "name": "EMR",
+    "fullName": "Amazon EMR",
+    "category": "analytics",
+    "descriptionJa": "Hadoop、Sparkなどのビッグデータフレームワークをマネージドクラスターで実行するサービス。",
+    "descriptionEn": "Cloud big data platform for running Apache Hadoop, Spark, and other frameworks.",
+    "icon": "emr.svg"
+  },
+  {
+    "id": "kinesis",
+    "prefix": "Amazon",
+    "name": "Kinesis",
+    "fullName": "Amazon Kinesis",
+    "category": "analytics",
+    "descriptionJa": "リアルタイムストリーミングデータを収集・処理・分析するサービス群。",
+    "descriptionEn": "Platform for real-time streaming data ingestion, processing, and analytics.",
+    "icon": "kinesis.svg"
+  },
+  {
+    "id": "glue",
+    "prefix": "AWS",
+    "name": "Glue",
+    "fullName": "AWS Glue",
+    "category": "analytics",
+    "descriptionJa": "ETL（抽出・変換・ロード）処理をサーバーレスで実行できるデータ統合サービス。",
+    "descriptionEn": "Serverless data integration service for ETL to prepare and load data for analytics.",
+    "icon": "glue.svg"
+  },
+  {
+    "id": "quicksight",
+    "prefix": "Amazon",
+    "name": "QuickSight",
+    "fullName": "Amazon QuickSight",
+    "category": "analytics",
+    "descriptionJa": "クラウドネイティブのビジネスインテリジェンス（BI）サービス。インタラクティブなダッシュボードを構築できる。",
+    "descriptionEn": "Cloud-native business intelligence service for creating interactive dashboards and reports.",
+    "icon": "quicksight.svg"
+  },
+  {
+    "id": "opensearch",
+    "prefix": "Amazon",
+    "name": "OpenSearch Service",
+    "fullName": "Amazon OpenSearch Service",
+    "category": "analytics",
+    "descriptionJa": "OpenSearch（旧Elasticsearch）を使ったログ分析・全文検索のマネージドサービス。",
+    "descriptionEn": "Managed service for OpenSearch to search, visualize, and analyze data at scale.",
+    "icon": "opensearch.svg"
+  },
+  {
+    "id": "msk",
+    "prefix": "Amazon",
+    "name": "MSK",
+    "fullName": "Amazon MSK",
+    "category": "analytics",
+    "descriptionJa": "Apache Kafkaをフルマネージドで利用できるストリーミングデータサービス。",
+    "descriptionEn": "Fully managed Apache Kafka service for real-time streaming data pipelines.",
+    "icon": "msk.svg"
+  },
+  {
+    "id": "cloudfront",
+    "prefix": "Amazon",
+    "name": "CloudFront",
+    "fullName": "Amazon CloudFront",
+    "category": "networking",
+    "descriptionJa": "エッジロケーションを通じてコンテンツを低レイテンシーで配信するCDNサービス。",
+    "descriptionEn": "Fast content delivery network (CDN) that securely delivers data with low latency.",
+    "icon": "cloudfront.svg"
+  },
+  {
+    "id": "route53",
+    "prefix": "Amazon",
+    "name": "Route 53",
+    "fullName": "Amazon Route 53",
+    "category": "networking",
+    "descriptionJa": "可用性の高いスケーラブルなDNSウェブサービス。ドメイン登録・ルーティングにも使用。",
+    "descriptionEn": "Scalable, highly available DNS web service for domain registration and routing.",
+    "icon": "route53.svg"
+  },
+  {
+    "id": "vpc",
+    "prefix": "Amazon",
+    "name": "VPC",
+    "fullName": "Amazon VPC",
+    "category": "networking",
+    "descriptionJa": "AWSクラウド内に論理的に分離したネットワーク環境を作成できるサービス。",
+    "descriptionEn": "Provision a logically isolated virtual network in the AWS cloud.",
+    "icon": "vpc.svg"
+  },
+  {
+    "id": "direct-connect",
+    "prefix": "AWS",
+    "name": "Direct Connect",
+    "fullName": "AWS Direct Connect",
+    "category": "networking",
+    "descriptionJa": "オンプレミスからAWSへの専用ネットワーク接続を確立するサービス。",
+    "descriptionEn": "Dedicated network connection from on-premises to AWS for consistent, low-latency connectivity.",
+    "icon": "direct-connect.svg"
+  },
+  {
+    "id": "transit-gateway",
+    "prefix": "AWS",
+    "name": "Transit Gateway",
+    "fullName": "AWS Transit Gateway",
+    "category": "networking",
+    "descriptionJa": "複数のVPCとオンプレミスネットワークをハブとして接続するネットワーク転送サービス。",
+    "descriptionEn": "Network transit hub to interconnect VPCs and on-premises networks.",
+    "icon": "transit-gateway.svg"
+  },
+  {
+    "id": "network-firewall",
+    "prefix": "AWS",
+    "name": "Network Firewall",
+    "fullName": "AWS Network Firewall",
+    "category": "networking",
+    "descriptionJa": "VPCに対してステートフルなネットワークファイアウォールをデプロイできるマネージドサービス。",
+    "descriptionEn": "Managed stateful network firewall and intrusion detection service for Amazon VPCs.",
+    "icon": "network-firewall.svg"
+  },
+  {
+    "id": "api-gateway",
+    "prefix": "Amazon",
+    "name": "API Gateway",
+    "fullName": "Amazon API Gateway",
+    "category": "networking",
+    "descriptionJa": "REST/WebSocket/HTTP APIの作成・公開・維持・監視・保護を行うフルマネージドサービス。",
+    "descriptionEn": "Fully managed service to create, publish, maintain, and secure APIs at any scale.",
+    "icon": "api-gateway.svg"
+  },
+  {
+    "id": "iam",
+    "prefix": "AWS",
+    "name": "IAM",
+    "fullName": "AWS IAM",
+    "category": "security",
+    "descriptionJa": "AWSリソースへのアクセスを安全に制御するためのユーザー・ロール・ポリシー管理サービス。",
+    "descriptionEn": "Manage access to AWS services and resources securely with users, groups, roles, and policies.",
+    "icon": "iam.svg"
+  },
+  {
+    "id": "kms",
+    "prefix": "AWS",
+    "name": "KMS",
+    "fullName": "AWS KMS",
+    "category": "security",
+    "descriptionJa": "データ暗号化に使用するキーを作成・管理できるマネージドサービス。",
+    "descriptionEn": "Create and manage cryptographic keys and control their use across AWS services.",
+    "icon": "kms.svg"
+  },
+  {
+    "id": "waf",
+    "prefix": "AWS",
+    "name": "WAF",
+    "fullName": "AWS WAF",
+    "category": "security",
+    "descriptionJa": "SQLインジェクションやXSSなど一般的なWebエクスプロイトからアプリを守るウェブアプリケーションファイアウォール。",
+    "descriptionEn": "Web application firewall that protects against common web exploits like SQL injection and XSS.",
+    "icon": "waf.svg"
+  },
+  {
+    "id": "shield",
+    "prefix": "AWS",
+    "name": "Shield",
+    "fullName": "AWS Shield",
+    "category": "security",
+    "descriptionJa": "DDoS攻撃からAWSアプリケーションを保護するマネージドDDoS防御サービス。",
+    "descriptionEn": "Managed DDoS protection service that safeguards AWS applications against attacks.",
+    "icon": "shield.svg"
+  },
+  {
+    "id": "secrets-manager",
+    "prefix": "AWS",
+    "name": "Secrets Manager",
+    "fullName": "AWS Secrets Manager",
+    "category": "security",
+    "descriptionJa": "APIキーやパスワードなどの機密情報を安全に保管・ローテーション・取得できるサービス。",
+    "descriptionEn": "Rotate, manage, and retrieve secrets like API keys and passwords throughout their lifecycle.",
+    "icon": "secrets-manager.svg"
+  },
+  {
+    "id": "certificate-manager",
+    "prefix": "AWS",
+    "name": "Certificate Manager",
+    "fullName": "AWS Certificate Manager",
+    "category": "security",
+    "descriptionJa": "SSL/TLS証明書のプロビジョニング・管理・デプロイを簡単に行えるサービス。",
+    "descriptionEn": "Provision, manage, and deploy SSL/TLS certificates for AWS services and internal resources.",
+    "icon": "certificate-manager.svg"
+  },
+  {
+    "id": "cognito",
+    "prefix": "Amazon",
+    "name": "Cognito",
+    "fullName": "Amazon Cognito",
+    "category": "security",
+    "descriptionJa": "ウェブ・モバイルアプリへのユーザー認証・認可・ユーザー管理を提供するサービス。",
+    "descriptionEn": "User authentication, authorization, and user management for web and mobile apps.",
+    "icon": "cognito.svg"
+  },
+  {
+    "id": "guardduty",
+    "prefix": "Amazon",
+    "name": "GuardDuty",
+    "fullName": "Amazon GuardDuty",
+    "category": "security",
+    "descriptionJa": "機械学習を使ってAWSアカウントとワークロードへの脅威を継続的に検出するサービス。",
+    "descriptionEn": "Intelligent threat detection service using machine learning to identify unusual activity.",
+    "icon": "guardduty.svg"
+  },
+  {
+    "id": "macie",
+    "prefix": "Amazon",
+    "name": "Macie",
+    "fullName": "Amazon Macie",
+    "category": "security",
+    "descriptionJa": "機械学習を使ってS3に保存された機密データを自動的に発見・保護するサービス。",
+    "descriptionEn": "Data security service that uses ML to discover and protect sensitive data in Amazon S3.",
+    "icon": "macie.svg"
+  },
+  {
+    "id": "inspector",
+    "prefix": "Amazon",
+    "name": "Inspector",
+    "fullName": "Amazon Inspector",
+    "category": "security",
+    "descriptionJa": "EC2インスタンスやコンテナイメージの脆弱性を自動的にスキャン・検出するサービス。",
+    "descriptionEn": "Automated vulnerability management service for EC2 instances and container images.",
+    "icon": "inspector.svg"
+  },
+  {
+    "id": "detective",
+    "prefix": "Amazon",
+    "name": "Detective",
+    "fullName": "Amazon Detective",
+    "category": "security",
+    "descriptionJa": "セキュリティインシデントの根本原因を迅速に調査・分析するためのサービス。",
+    "descriptionEn": "Analyze, investigate, and identify the root cause of security findings and incidents.",
+    "icon": "detective.svg"
+  },
+  {
+    "id": "security-hub",
+    "prefix": "AWS",
+    "name": "Security Hub",
+    "fullName": "AWS Security Hub",
+    "category": "security",
+    "descriptionJa": "AWSアカウント全体のセキュリティアラートとコンプライアンス状態を一元管理するサービス。",
+    "descriptionEn": "Centralized security posture management and security findings aggregation across AWS accounts.",
+    "icon": "security-hub.svg"
+  },
+  {
+    "id": "organizations",
+    "prefix": "AWS",
+    "name": "Organizations",
+    "fullName": "AWS Organizations",
+    "category": "security",
+    "descriptionJa": "複数のAWSアカウントを一元管理し、ポリシーを階層的に適用できるサービス。",
+    "descriptionEn": "Centrally manage and govern multiple AWS accounts with policy-based management.",
+    "icon": "organizations.svg"
+  },
+  {
+    "id": "control-tower",
+    "prefix": "AWS",
+    "name": "Control Tower",
+    "fullName": "AWS Control Tower",
+    "category": "security",
+    "descriptionJa": "マルチアカウントAWS環境のセットアップと管理をベストプラクティスに従って自動化するサービス。",
+    "descriptionEn": "Set up and govern a secure, multi-account AWS environment based on best practices.",
+    "icon": "control-tower.svg"
+  },
+  {
+    "id": "sqs",
+    "prefix": "Amazon",
+    "name": "SQS",
+    "fullName": "Amazon SQS",
+    "category": "messaging",
+    "descriptionJa": "マイクロサービス・分散システム間でメッセージを非同期に送受信できるフルマネージドキューサービス。",
+    "descriptionEn": "Fully managed message queuing service for decoupling microservices and distributed systems.",
+    "icon": "sqs.svg"
+  },
+  {
+    "id": "sns",
+    "prefix": "Amazon",
+    "name": "SNS",
+    "fullName": "Amazon SNS",
+    "category": "messaging",
+    "descriptionJa": "アプリケーション間およびアプリケーション・ユーザー間のメッセージ配信を行うPub/Subサービス。",
+    "descriptionEn": "Managed pub/sub messaging service for application-to-application and app-to-person messaging.",
+    "icon": "sns.svg"
+  },
+  {
+    "id": "ses",
+    "prefix": "Amazon",
+    "name": "SES",
+    "fullName": "Amazon SES",
+    "category": "messaging",
+    "descriptionJa": "大規模なメール送受信が可能なクラウドベースのメール送信サービス。",
+    "descriptionEn": "Cloud-based email sending service for marketing, notification, and transactional emails.",
+    "icon": "ses.svg"
+  },
+  {
+    "id": "eventbridge",
+    "prefix": "Amazon",
+    "name": "EventBridge",
+    "fullName": "Amazon EventBridge",
+    "category": "messaging",
+    "descriptionJa": "AWSサービスやSaaSアプリのイベントを使ってアプリケーションを接続できるサーバーレスイベントバス。",
+    "descriptionEn": "Serverless event bus to connect applications using events from AWS services and SaaS apps.",
+    "icon": "eventbridge.svg"
+  },
+  {
+    "id": "mq",
+    "prefix": "Amazon",
+    "name": "MQ",
+    "fullName": "Amazon MQ",
+    "category": "messaging",
+    "descriptionJa": "ActiveMQおよびRabbitMQと互換性のあるマネージドメッセージブローカーサービス。",
+    "descriptionEn": "Managed message broker for Apache ActiveMQ and RabbitMQ.",
+    "icon": "mq.svg"
+  },
+  {
+    "id": "step-functions",
+    "prefix": "AWS",
+    "name": "Step Functions",
+    "fullName": "AWS Step Functions",
+    "category": "developer",
+    "descriptionJa": "複数のAWSサービスをビジュアルワークフローとして調整できるサーバーレスオーケストレーションサービス。",
+    "descriptionEn": "Visual workflow service to orchestrate AWS services into serverless workflows.",
+    "icon": "step-functions.svg"
+  },
+  {
+    "id": "codepipeline",
+    "prefix": "AWS",
+    "name": "CodePipeline",
+    "fullName": "AWS CodePipeline",
+    "category": "developer",
+    "descriptionJa": "コードの変更ごとにビルド・テスト・デプロイを自動化できるCI/CDパイプラインサービス。",
+    "descriptionEn": "Fully managed continuous delivery service to automate release pipelines.",
+    "icon": "codepipeline.svg"
+  },
+  {
+    "id": "codebuild",
+    "prefix": "AWS",
+    "name": "CodeBuild",
+    "fullName": "AWS CodeBuild",
+    "category": "developer",
+    "descriptionJa": "ソースコードのコンパイル・テスト・パッケージ化を行うフルマネージドCIサービス。",
+    "descriptionEn": "Fully managed continuous integration service that compiles source code, runs tests, and produces packages.",
+    "icon": "codebuild.svg"
+  },
+  {
+    "id": "codedeploy",
+    "prefix": "AWS",
+    "name": "CodeDeploy",
+    "fullName": "AWS CodeDeploy",
+    "category": "developer",
+    "descriptionJa": "EC2・Lambda・ECSへのデプロイを自動化するマネージドデプロイメントサービス。",
+    "descriptionEn": "Automated deployment service for EC2, Lambda, ECS, and on-premises servers.",
+    "icon": "codedeploy.svg"
+  },
+  {
+    "id": "codecommit",
+    "prefix": "AWS",
+    "name": "CodeCommit",
+    "fullName": "AWS CodeCommit",
+    "category": "developer",
+    "descriptionJa": "Gitリポジトリをホストするフルマネージドのソースコントロールサービス（非推奨）。",
+    "descriptionEn": "Fully managed source control service that hosts secure Git-based repositories.",
+    "icon": "codecommit.svg"
+  },
+  {
+    "id": "xray",
+    "prefix": "AWS",
+    "name": "X-Ray",
+    "fullName": "AWS X-Ray",
+    "category": "developer",
+    "descriptionJa": "本番環境のアプリケーションのリクエストをトレース・分析・デバッグするサービス。",
+    "descriptionEn": "Distributed tracing service to analyze and debug production applications.",
+    "icon": "xray.svg"
+  },
+  {
+    "id": "appsync",
+    "prefix": "AWS",
+    "name": "AppSync",
+    "fullName": "AWS AppSync",
+    "category": "developer",
+    "descriptionJa": "GraphQL APIを使ったリアルタイム・オフラインデータ同期ができるマネージドサービス。",
+    "descriptionEn": "Managed GraphQL service for real-time and offline data synchronization.",
+    "icon": "appsync.svg"
+  },
+  {
+    "id": "amplify",
+    "prefix": "AWS",
+    "name": "Amplify",
+    "fullName": "AWS Amplify",
+    "category": "developer",
+    "descriptionJa": "フルスタックWebおよびモバイルアプリをAWS上で素早く構築・デプロイできるサービス。",
+    "descriptionEn": "Build, deploy, and host full-stack web and mobile apps on AWS with ease.",
+    "icon": "amplify.svg"
+  },
+  {
+    "id": "cloudwatch",
+    "prefix": "Amazon",
+    "name": "CloudWatch",
+    "fullName": "Amazon CloudWatch",
+    "category": "management",
+    "descriptionJa": "AWSリソースとアプリケーションの監視・ログ収集・アラート設定ができるモニタリングサービス。",
+    "descriptionEn": "Monitoring and observability service for AWS resources, applications, and infrastructure.",
+    "icon": "cloudwatch.svg"
+  },
+  {
+    "id": "cloudformation",
+    "prefix": "AWS",
+    "name": "CloudFormation",
+    "fullName": "AWS CloudFormation",
+    "category": "management",
+    "descriptionJa": "インフラをコード（JSON/YAML）で定義しプロビジョニングできるIaC（Infrastructure as Code）サービス。",
+    "descriptionEn": "Infrastructure as Code service to model and provision AWS resources using templates.",
+    "icon": "cloudformation.svg"
+  },
+  {
+    "id": "cloudtrail",
+    "prefix": "AWS",
+    "name": "CloudTrail",
+    "fullName": "AWS CloudTrail",
+    "category": "management",
+    "descriptionJa": "AWSアカウント内のAPI呼び出しを記録・監査するガバナンスサービス。",
+    "descriptionEn": "Audit and monitor account activity by recording API calls across AWS infrastructure.",
+    "icon": "cloudtrail.svg"
+  },
+  {
+    "id": "config",
+    "prefix": "AWS",
+    "name": "Config",
+    "fullName": "AWS Config",
+    "category": "management",
+    "descriptionJa": "AWSリソースの構成変更を継続的に記録・評価するコンプライアンスサービス。",
+    "descriptionEn": "Continuously assess, audit, and evaluate the configurations of AWS resources.",
+    "icon": "config.svg"
+  },
+  {
+    "id": "systems-manager",
+    "prefix": "AWS",
+    "name": "Systems Manager",
+    "fullName": "AWS Systems Manager",
+    "category": "management",
+    "descriptionJa": "EC2インスタンスとオンプレミスサーバーの運用タスクを一元管理できるサービス。",
+    "descriptionEn": "Centralized operational management for EC2 instances and on-premises servers.",
+    "icon": "systems-manager.svg"
+  },
+  {
+    "id": "trusted-advisor",
+    "prefix": "AWS",
+    "name": "Trusted Advisor",
+    "fullName": "AWS Trusted Advisor",
+    "category": "management",
+    "descriptionJa": "コスト・パフォーマンス・セキュリティ・耐障害性についてのベストプラクティスを推奨するサービス。",
+    "descriptionEn": "Real-time guidance to provision resources following AWS best practices for cost, performance, and security.",
+    "icon": "trusted-advisor.svg"
+  },
+  {
+    "id": "compute-optimizer",
+    "prefix": "AWS",
+    "name": "Compute Optimizer",
+    "fullName": "AWS Compute Optimizer",
+    "category": "management",
+    "descriptionJa": "機械学習を使ってEC2・ECS・Lambdaなどのリソース設定を最適化するレコメンデーションサービス。",
+    "descriptionEn": "Recommends optimal AWS compute resources for workloads using machine learning.",
+    "icon": "compute-optimizer.svg"
+  },
+  {
+    "id": "sagemaker",
+    "prefix": "Amazon",
+    "name": "SageMaker",
+    "fullName": "Amazon SageMaker",
+    "category": "ml",
+    "descriptionJa": "機械学習モデルの構築・学習・デプロイをエンドツーエンドで支援するフルマネージドサービス。",
+    "descriptionEn": "Fully managed service to build, train, and deploy machine learning models at scale.",
+    "icon": "sagemaker.svg"
+  },
+  {
+    "id": "bedrock",
+    "prefix": "Amazon",
+    "name": "Bedrock",
+    "fullName": "Amazon Bedrock",
+    "category": "ml",
+    "descriptionJa": "Anthropic・Stability AI等の基盤モデルをAPIで利用できる生成AIサービス。",
+    "descriptionEn": "Fully managed service for building generative AI applications using foundation models from leading AI companies.",
+    "icon": "bedrock.svg"
+  },
+  {
+    "id": "rekognition",
+    "prefix": "Amazon",
+    "name": "Rekognition",
+    "fullName": "Amazon Rekognition",
+    "category": "ml",
+    "descriptionJa": "画像・動画から顔認識・物体検出・テキスト抽出などを行うAIビジョンサービス。",
+    "descriptionEn": "AI service to add image and video analysis — face recognition, object detection, and text extraction.",
+    "icon": "rekognition.svg"
+  },
+  {
+    "id": "comprehend",
+    "prefix": "Amazon",
+    "name": "Comprehend",
+    "fullName": "Amazon Comprehend",
+    "category": "ml",
+    "descriptionJa": "自然言語処理（NLP）を使ってテキストからインサイトや関係性を抽出するAIサービス。",
+    "descriptionEn": "NLP service that uses machine learning to find insights and relationships in text.",
+    "icon": "comprehend.svg"
+  },
+  {
+    "id": "polly",
+    "prefix": "Amazon",
+    "name": "Polly",
+    "fullName": "Amazon Polly",
+    "category": "ml",
+    "descriptionJa": "テキストをリアルな音声に変換するAIテキスト読み上げサービス。多言語・多声種に対応。",
+    "descriptionEn": "Turn text into lifelike speech using deep learning — supports dozens of voices and languages.",
+    "icon": "polly.svg"
+  },
+  {
+    "id": "transcribe",
+    "prefix": "Amazon",
+    "name": "Transcribe",
+    "fullName": "Amazon Transcribe",
+    "category": "ml",
+    "descriptionJa": "音声をテキストに自動変換するAI音声認識サービス。コールセンター分析などに活用。",
+    "descriptionEn": "Automatic speech recognition (ASR) service to convert speech to text accurately.",
+    "icon": "transcribe.svg"
+  },
+  {
+    "id": "translate",
+    "prefix": "Amazon",
+    "name": "Translate",
+    "fullName": "Amazon Translate",
+    "category": "ml",
+    "descriptionJa": "ニューラル機械翻訳を使って多言語間でテキストを高品質に翻訳するAIサービス。",
+    "descriptionEn": "Neural machine translation service for fast, high-quality language translation.",
+    "icon": "translate.svg"
+  },
+  {
+    "id": "lex",
+    "prefix": "Amazon",
+    "name": "Lex",
+    "fullName": "Amazon Lex",
+    "category": "ml",
+    "descriptionJa": "音声・テキストを使った会話型インターフェース（チャットボット）を構築するAIサービス。",
+    "descriptionEn": "Build conversational chatbots using voice and text with automatic speech recognition and NLU.",
+    "icon": "lex.svg"
+  },
+  {
+    "id": "textract",
+    "prefix": "Amazon",
+    "name": "Textract",
+    "fullName": "Amazon Textract",
+    "category": "ml",
+    "descriptionJa": "ドキュメントやフォームからテキスト・データを自動抽出するAI-OCRサービス。",
+    "descriptionEn": "Extract text and data from scanned documents automatically using ML.",
+    "icon": "textract.svg"
+  },
+  {
+    "id": "personalize",
+    "prefix": "Amazon",
+    "name": "Personalize",
+    "fullName": "Amazon Personalize",
+    "category": "ml",
+    "descriptionJa": "機械学習を使ったリアルタイムパーソナライズ・レコメンデーションを構築できるサービス。",
+    "descriptionEn": "Machine learning service to create real-time personalized recommendations.",
+    "icon": "personalize.svg"
+  },
+  {
+    "id": "connect",
+    "prefix": "Amazon",
+    "name": "Connect",
+    "fullName": "Amazon Connect",
+    "category": "business",
+    "descriptionJa": "AIを活用したクラウドベースのコンタクトセンターサービス。セルフサービス型で素早く構築できる。",
+    "descriptionEn": "Cloud-based contact center service that makes it easy to deliver superior customer service.",
+    "icon": "connect.svg"
+  },
+  {
+    "id": "workspaces",
+    "prefix": "Amazon",
+    "name": "WorkSpaces",
+    "fullName": "Amazon WorkSpaces",
+    "category": "business",
+    "descriptionJa": "クラウド上のバーチャルデスクトップ（VDI）を提供するマネージドDesktop-as-a-Serviceサービス。",
+    "descriptionEn": "Managed Desktop-as-a-Service (DaaS) solution for virtual cloud desktops.",
+    "icon": "workspaces.svg"
+  },
+  {
+    "id": "appstream",
+    "prefix": "Amazon",
+    "name": "AppStream 2.0",
+    "fullName": "Amazon AppStream 2.0",
+    "category": "business",
+    "descriptionJa": "デスクトップアプリをAWSからWebブラウザに安全にストリーミングできるサービス。",
+    "descriptionEn": "Fully managed application streaming service to stream desktop apps securely via a browser.",
+    "icon": "appstream.svg"
+  },
+  {
+    "id": "pinpoint",
+    "prefix": "Amazon",
+    "name": "Pinpoint",
+    "fullName": "Amazon Pinpoint",
+    "category": "business",
+    "descriptionJa": "メール・SMS・プッシュ通知などを通じて顧客とエンゲージするマルチチャネル通信サービス。",
+    "descriptionEn": "Multichannel marketing communications service for email, SMS, push, and voice messages.",
+    "icon": "pinpoint.svg"
+  },
+  {
+    "id": "transfer-family",
+    "prefix": "AWS",
+    "name": "Transfer Family",
+    "fullName": "AWS Transfer Family",
+    "category": "storage",
+    "descriptionJa": "SFTP・FTPS・FTPを使ったファイル転送をAWSストレージへ直接行えるマネージドサービス。",
+    "descriptionEn": "Managed file transfer service for SFTP, FTPS, and FTP into Amazon S3 or EFS.",
+    "icon": "transfer-family.svg"
+  },
+  {
+    "id": "iot-core",
+    "prefix": "AWS",
+    "name": "IoT Core",
+    "fullName": "AWS IoT Core",
+    "category": "compute",
+    "descriptionJa": "IoTデバイスをAWSクラウドやその他デバイスに安全に接続・管理できるマネージドサービス。",
+    "descriptionEn": "Managed cloud service to connect, manage, and secure IoT devices at scale.",
+    "icon": "iot-core.svg"
+  },
+  {
+    "id": "migration-hub",
+    "prefix": "AWS",
+    "name": "Migration Hub",
+    "fullName": "AWS Migration Hub",
+    "category": "management",
+    "descriptionJa": "AWSへのアプリケーション移行状況を一元的に追跡・管理できるサービス。",
+    "descriptionEn": "Single place to track application migrations to AWS across multiple migration tools.",
+    "icon": "migration-hub.svg"
+  }
+]
