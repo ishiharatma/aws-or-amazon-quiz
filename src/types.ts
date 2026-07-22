@@ -7,6 +7,7 @@ export interface Service {
   descriptionJa: string;
   descriptionEn: string;
   icon?: string;
+  url?: string;
 }
 
 export type Lang = 'ja' | 'en';

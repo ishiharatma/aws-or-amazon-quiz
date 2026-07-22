@@ -23,6 +23,8 @@ const translations = {
     share_text: 'Amazon or AWS Quiz で {score}/{total} ({pct}%) でした！あなたは？',
     share_challenge: 'あなたもチャレンジ！',
     lang_toggle: 'EN',
+    service_total: '全{count}サービス対応',
+    service_page: 'AWS公式ページ',
     ranks: {
       legend: 'AWS Naming Legend',
       master: 'AWS Naming Master',
@@ -53,6 +55,8 @@ const translations = {
     share_text: 'I scored {score}/{total} ({pct}%) on Amazon or AWS Quiz!',
     share_challenge: 'Can you beat me?',
     lang_toggle: 'JA',
+    service_total: '{count} services',
+    service_page: 'AWS Service Page',
     ranks: {
       legend: 'AWS Naming Legend',
       master: 'AWS Naming Master',

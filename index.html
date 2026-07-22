@@ -22,7 +22,7 @@
 <body>
   <!-- Header -->
   <header class="header" role="banner">
-    <span class="header-logo" aria-label="Amazon or AWS Quiz">Amazon or AWS ?</span>
+    <span class="header-logo" aria-label="Amazon or AWS Quiz">Amazon or AWS ?<span class="header-version" aria-label="version 1.5">v1.5</span></span>
     <div class="header-controls">
       <button id="lang-toggle" type="button" aria-label="Switch language">EN</button>
     </div>
@@ -35,6 +35,7 @@
         <span class="start-badge">Quiz Game</span>
         <h1 class="start-title">Amazon or AWS ?</h1>
         <p class="start-subtitle">AWSサービスの正式名称を当てよう！</p>
+        <p class="service-count-text"></p>
         <div class="start-meta">
           <span class="meta-item">
             <span class="meta-icon">📝</span>
@@ -89,6 +90,10 @@
           <div class="result-verdict"></div>
           <div class="full-name"></div>
           <div class="service-description"></div>
+          <a class="service-link" href="#" target="_blank" rel="noopener noreferrer" hidden>
+            <svg class="service-link-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            <span class="service-link-text">AWS公式ページ</span>
+          </a>
           <button class="next-btn" type="button" hidden>次へ</button>
         </div>
 

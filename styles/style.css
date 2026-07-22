@@ -142,6 +142,20 @@ main {
   letter-spacing: -0.01em;
 }
 
+.header-version {
+  display: inline-block;
+  background: rgba(255, 153, 0, 0.18);
+  color: rgba(255, 153, 0, 0.85);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 0.15rem 0.45rem;
+  border-radius: 100px;
+  border: 1px solid rgba(255, 153, 0, 0.3);
+  margin-left: 0.5rem;
+  vertical-align: middle;
+}
+
 .header-controls {
   display: flex;
   gap: 0.5rem;
@@ -216,8 +230,14 @@ main {
 
 .start-subtitle {
   color: var(--text-secondary);
-  margin-bottom: 2rem;
+  margin-bottom: 0.4rem;
   font-size: 1rem;
+}
+
+.service-count-text {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  margin-bottom: 1.75rem;
 }
 
 .start-meta {
@@ -485,7 +505,33 @@ main {
   font-size: 0.875rem;
   color: var(--text-secondary);
   line-height: 1.6;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.service-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--aws-blue);
+  text-decoration: none;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.3rem 0.7rem;
+  border: 1.5px solid var(--aws-blue);
+  border-radius: 100px;
+  margin-bottom: 0.875rem;
+  transition: background var(--transition), color var(--transition);
+}
+
+.service-link:hover {
+  background: var(--aws-blue);
+  color: #fff;
+}
+
+.service-link-icon {
+  width: 11px;
+  height: 11px;
+  flex-shrink: 0;
 }
 
 .next-btn {
