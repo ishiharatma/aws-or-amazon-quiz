@@ -1,0 +1,682 @@
+<title>ランク表示・次へボタン改善 — 設計レビュー</title>
+<style>
+/* ── トークン ── */
+:root {
+  --bg:       #F0F2F5;
+  --surface:  #FFFFFF;
+  --sf2:      #F8F9FA;
+  --border:   #E1E4E8;
+  --text:     #0D1117;
+  --text2:    #586069;
+  --muted:    #8B949E;
+  --accent:   #FF9900;
+  --dark:     #232F3E;
+  --dark2:    #1A2433;
+  --blue:     #1A73E8;
+  --ok:       #2EA043;
+  --ok-bg:    #E8F5E9;
+  --ok-bdr:   #81C784;
+  --ng:       #CF222E;
+  --ng-bg:    #FFEBEE;
+  --ng-bdr:   #EF9A9A;
+  --r:        10px;
+  --rs:       6px;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:#0D1117;--surface:#161B22;--sf2:#1C2128;--border:#30363D;
+    --text:#E6EDF3;--text2:#8B949E;--muted:#6E7681;
+    --ok:#3FB950;--ok-bg:#0D2818;--ok-bdr:#238636;
+    --ng:#F85149;--ng-bg:#2D1117;--ng-bdr:#6E1B1B;
+  }
+}
+:root[data-theme="dark"] {
+  --bg:#0D1117;--surface:#161B22;--sf2:#1C2128;--border:#30363D;
+  --text:#E6EDF3;--text2:#8B949E;--muted:#6E7681;
+  --ok:#3FB950;--ok-bg:#0D2818;--ok-bdr:#238636;
+  --ng:#F85149;--ng-bg:#2D1117;--ng-bdr:#6E1B1B;
+}
+:root[data-theme="light"] {
+  --bg:#F0F2F5;--surface:#FFFFFF;--sf2:#F8F9FA;--border:#E1E4E8;
+  --text:#0D1117;--text2:#586069;--muted:#8B949E;
+  --ok:#2EA043;--ok-bg:#E8F5E9;--ok-bdr:#81C784;
+  --ng:#CF222E;--ng-bg:#FFEBEE;--ng-bdr:#EF9A9A;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Noto Sans JP', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100dvh;
+  padding: 2rem 1.25rem 3rem;
+}
+
+/* ── ページヘッダー ── */
+.pg-header {
+  max-width: 1000px;
+  margin: 0 auto 2.5rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border);
+}
+.pg-eyebrow {
+  font-size: 0.72rem;font-weight:700;letter-spacing:0.1em;
+  text-transform:uppercase;color:var(--accent);margin-bottom:0.4rem;
+}
+.pg-title { font-size:1.5rem;font-weight:800;letter-spacing:-0.02em;margin-bottom:0.4rem; }
+.pg-sub { font-size:0.875rem;color:var(--text2);line-height:1.6; }
+.pg-version {
+  display:inline-flex;align-items:center;gap:0.4rem;margin-top:0.6rem;
+  font-size:0.72rem;font-weight:700;color:var(--muted);
+}
+.pg-version-tag {
+  background:rgba(255,153,0,0.15);color:var(--accent);
+  border:1px solid rgba(255,153,0,0.3);border-radius:100px;
+  padding:0.1rem 0.45rem;font-size:0.65rem;font-weight:700;letter-spacing:0.06em;
+}
+
+/* ── セクションタイトル ── */
+.section-title {
+  max-width: 1000px;
+  margin: 0 auto 1rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.section-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+.section-wrap { margin-bottom: 2.5rem; }
+
+/* ── グリッド ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 700px) {
+  .grid { grid-template-columns: 1fr; }
+  .grid-3 { grid-template-columns: 1fr; }
+}
+
+/* ── オプションカード ── */
+.opt {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  overflow: hidden;
+}
+.opt-label {
+  background: var(--dark);
+  padding: 0.6rem 0.875rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+.opt-tag {
+  font-size:0.6rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;
+  background:rgba(255,153,0,0.2);color:var(--accent);
+  border:1px solid rgba(255,153,0,0.3);border-radius:100px;padding:0.12rem 0.45rem;
+}
+.opt-name { font-size:0.875rem;font-weight:700;color:#fff; }
+.opt-badge {
+  font-size:0.6rem;font-weight:600;
+  background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.55);
+  border-radius:100px;padding:0.1rem 0.4rem;margin-left:auto;
+}
+.opt-badge.implemented {
+  background: rgba(63,185,80,0.2);
+  color: #3FB950;
+  border: 1px solid rgba(63,185,80,0.3);
+}
+
+/* ── フォンモックアップ共通 ── */
+.phone-wrap {
+  padding:0.875rem;
+  display:flex;justify-content:center;
+  background:var(--sf2);border-bottom:1px solid var(--border);
+}
+.phone {
+  width: 180px;
+  background:var(--surface);
+  border:1.5px solid var(--border);
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 4px 18px rgba(0,0,0,0.13);
+}
+
+/* quiz header mock */
+.m-qh { background:var(--dark);padding:4px 7px;display:flex;flex-direction:column;gap:3px; }
+.m-qh-row { display:flex;justify-content:space-between; }
+.m-qh-prog { font-size:5.5px;color:rgba(255,255,255,0.85);font-weight:600; }
+.m-qh-score { font-size:5.5px;color:var(--accent);font-weight:700; }
+.m-prog-bar { height:2px;background:rgba(255,255,255,0.15);border-radius:2px;overflow:hidden; }
+.m-prog-fill { height:100%;background:var(--accent); }
+
+/* mock question */
+.m-qa { padding:8px 8px 5px;text-align:center; }
+.m-icon {
+  width:24px;height:24px;margin:0 auto 4px;border-radius:5px;
+  background:#232F3E;display:flex;align-items:center;justify-content:center;font-size:12px;
+}
+.m-svc { font-size:8px;font-weight:800;color:var(--text);margin-bottom:2px;letter-spacing:-0.01em; }
+.m-qtxt { font-size:5.5px;color:var(--text2);margin-bottom:5px; }
+.m-ans-btns { display:grid;grid-template-columns:1fr 1fr;gap:3px; }
+.m-btn { padding:5px 3px;border-radius:3px;font-size:6.5px;font-weight:800;text-align:center;border:1.5px solid; }
+.m-btn.ok  { background:var(--ok-bg);border-color:var(--ok);color:var(--ok); }
+.m-btn.ng  { background:var(--ng-bg);border-color:var(--ng);color:var(--ng); }
+.m-btn.neutral { background:var(--sf2);border-color:var(--border);color:var(--text2); }
+
+/* mock result area */
+.m-result { border-top:1px solid var(--border);padding:5px 8px 6px; }
+.m-result.ng-r { background:var(--ng-bg);border-color:var(--ng-bdr); }
+.m-result.ok-r { background:var(--ok-bg);border-color:var(--ok-bdr); }
+.m-verdict-row { display:flex;align-items:center;justify-content:space-between;margin-bottom:2px;gap:3px; }
+.m-verdict { font-size:6.5px;font-weight:800;margin-bottom:2px; }
+.m-verdict.ng-v { color:var(--ng); }
+.m-verdict.ok-v { color:var(--ok); }
+.m-fullname { font-size:5.5px;font-weight:700;color:var(--text);margin-bottom:2px; }
+.m-desc { font-size:4.5px;color:var(--text2);line-height:1.4;margin-bottom:3px; }
+
+/* next button variants */
+.m-next-dark {
+  display:block;width:100%;background:var(--dark);color:#fff;
+  border-radius:3px;font-size:6.5px;font-weight:700;padding:4px;text-align:center;
+}
+.m-next-orange {
+  display:block;width:100%;background:var(--accent);color:#000;
+  border-radius:3px;font-size:6.5px;font-weight:800;padding:4px;text-align:center;
+  box-shadow:0 0 0 2px rgba(255,153,0,0.4);
+}
+.m-next-inline-dark {
+  background:var(--dark);color:#fff;border-radius:3px;
+  font-size:5.5px;font-weight:700;padding:2px 5px;white-space:nowrap;flex-shrink:0;
+}
+.m-next-inline-orange {
+  background:var(--accent);color:#000;border-radius:3px;
+  font-size:5.5px;font-weight:800;padding:2px 5px;white-space:nowrap;flex-shrink:0;
+  box-shadow:0 0 0 2px rgba(255,153,0,0.4);
+}
+
+/* streak mock */
+.m-streak-wrap { padding:2px 8px;min-height:14px;display:flex;align-items:center;justify-content:center; }
+.m-streak-badge {
+  font-size:5.5px;font-weight:700;color:var(--accent);
+  background:rgba(255,153,0,0.12);border:1px solid rgba(255,153,0,0.3);
+  border-radius:100px;padding:1px 5px;
+}
+.m-streak-placeholder { height:14px; }
+
+/* result screen mock */
+.m-result-screen { padding:8px; }
+.m-result-title { font-size:8px;font-weight:800;text-align:center;color:var(--text);margin-bottom:6px; }
+.m-score-area { text-align:center;margin-bottom:5px; }
+.m-score-label { font-size:5px;color:var(--text2);font-weight:600;text-transform:uppercase;letter-spacing:0.05em; }
+.m-score-num { font-size:14px;font-weight:900;color:var(--accent);line-height:1; }
+.m-detail-boxes { display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-bottom:5px; }
+.m-detail-box { background:var(--sf2);border:1px solid var(--border);border-radius:4px;padding:3px 5px;text-align:center; }
+.m-detail-label { font-size:4px;color:var(--text2);font-weight:600;text-transform:uppercase;margin-bottom:1px; }
+.m-detail-val { font-size:7px;font-weight:800;color:var(--text); }
+.m-rank-old { font-size:7px;font-weight:800;color:var(--text); }
+.m-rank-new { font-size:7px;font-weight:800; }
+.m-rank-new.perfect { color:var(--accent); }
+.m-rank-new.excellent { color:var(--accent); }
+.m-rank-new.good { color:#38B2C4; }
+
+/* プロコン */
+.opt-meta { padding:0.75rem 0.875rem 0.875rem;display:flex;flex-direction:column;gap:0.4rem; }
+.meta-row { display:flex;gap:0.4rem;font-size:0.75rem;line-height:1.5;color:var(--text2); }
+.meta-icon { flex-shrink:0;margin-top:0.05em; }
+.meta-row.pro .meta-icon { color:var(--ok); }
+.meta-row.con .meta-icon { color:var(--ng); }
+.meta-row.neutral .meta-icon { color:var(--muted); }
+
+/* ── フッターノート ── */
+.footnote {
+  max-width: 1000px;
+  margin: 2rem auto 0;
+  padding: 1rem 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  font-size: 0.8rem;
+  color: var(--text2);
+  line-height: 1.7;
+}
+.footnote strong { color: var(--text); }
+.footnote-title {
+  font-size: 0.7rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:0.4rem;
+}
+code {
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  font-size: 0.82em;
+  background: var(--sf2);
+  padding: 1px 4px;
+  border-radius: 3px;
+  border: 1px solid var(--border);
+}
+
+/* change summary table */
+.change-table {
+  max-width: 1000px;
+  margin: 0 auto 2.5rem;
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.8rem;
+}
+.change-table th {
+  background: var(--dark);
+  color: rgba(255,255,255,0.8);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.5rem 0.875rem;
+  text-align: left;
+}
+.change-table td {
+  padding: 0.55rem 0.875rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--text2);
+  vertical-align: top;
+}
+.change-table tr:last-child td { border-bottom: none; }
+.change-table tr:hover td { background: var(--sf2); }
+.change-table .badge-before {
+  display:inline-block;background:rgba(207,34,46,0.1);color:var(--ng);
+  border:1px solid rgba(207,34,46,0.25);border-radius:4px;
+  padding:1px 6px;font-size:0.7rem;font-weight:600;
+}
+.change-table .badge-after {
+  display:inline-block;background:rgba(46,160,67,0.1);color:var(--ok);
+  border:1px solid rgba(46,160,67,0.25);border-radius:4px;
+  padding:1px 6px;font-size:0.7rem;font-weight:600;
+}
+.change-table .file-tag {
+  font-family:'SF Mono','Fira Code',monospace;font-size:0.7rem;
+  color:var(--blue);
+}
+</style>
+
+<!-- ── ページヘッダー ── -->
+<div class="pg-header">
+  <div class="pg-eyebrow">UX Design Review</div>
+  <h1 class="pg-title">ランク表示・次へボタン改善 — 設計レビュー</h1>
+  <p class="pg-sub">v1.7 で実施した3つの改善：① ランク表示を絵文字ランク名から得点メッセージに変更　② 次へボタンをオレンジ色＋パルスアニメーション化で視認性向上　③ ストリークバッジの高さ予約でレイアウトシフト解消</p>
+  <div class="pg-version">
+    <span class="pg-version-tag">v1.7</span>
+    実装済み
+  </div>
+</div>
+
+<!-- ── 変更サマリー ── -->
+<div class="section-wrap">
+  <div class="section-title">変更サマリー</div>
+  <table class="change-table">
+    <thead>
+      <tr>
+        <th>変更ファイル</th>
+        <th>対象</th>
+        <th>変更前</th>
+        <th>変更後</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="file-tag">src/result.ts</td>
+        <td>結果画面ランク表示</td>
+        <td><span class="badge-before">絵文字 + ランク名 (例: 🥇 AWS Naming Master)</span></td>
+        <td><span class="badge-after">スコア連動メッセージ (例: 完璧！！ / Excellent!)</span></td>
+      </tr>
+      <tr>
+        <td class="file-tag">src/quiz.ts</td>
+        <td>getRankMessage() 追加</td>
+        <td><span class="badge-before">getRankEmoji() のみ</span></td>
+        <td><span class="badge-after">新関数：パーセンテージ別メッセージ＋色を返す</span></td>
+      </tr>
+      <tr>
+        <td class="file-tag">src/i18n.ts</td>
+        <td>ラベル文言</td>
+        <td><span class="badge-before">ランク / Rank</span></td>
+        <td><span class="badge-after">評価 / Result</span></td>
+      </tr>
+      <tr>
+        <td class="file-tag">styles/style.css</td>
+        <td>.next-btn 背景色</td>
+        <td><span class="badge-before">background: var(--aws-dark) / color: #fff</span></td>
+        <td><span class="badge-after">background: var(--aws-orange) / color: #000</span></td>
+      </tr>
+      <tr>
+        <td class="file-tag">styles/style.css</td>
+        <td>.verdict-next-row .next-btn</td>
+        <td><span class="badge-before">animation: なし、min-height: 36px</span></td>
+        <td><span class="badge-after">next-pulse アニメーション、min-height: 40px</span></td>
+      </tr>
+      <tr>
+        <td class="file-tag">styles/style.css</td>
+        <td>.streak[hidden]</td>
+        <td><span class="badge-before">display:none → レイアウトシフト発生</span></td>
+        <td><span class="badge-after">visibility:hidden で高さ予約、レイアウト固定</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ── SECTION 1: 次へボタン ── -->
+<div class="section-wrap">
+  <div class="section-title">変更 1　次へボタンの視認性向上</div>
+  <div class="grid">
+
+    <!-- 変更前 -->
+    <div class="opt">
+      <div class="opt-label">
+        <span class="opt-name">変更前</span>
+        <span class="opt-tag">v1.6</span>
+        <span class="opt-badge" style="margin-left:auto">ダーク背景</span>
+      </div>
+      <div class="phone-wrap">
+        <div class="phone">
+          <div class="m-qh">
+            <div class="m-qh-row">
+              <span class="m-qh-prog">問 10 / 20</span>
+              <span class="m-qh-score">スコア: 7/9</span>
+            </div>
+            <div class="m-prog-bar"><div class="m-prog-fill" style="width:50%"></div></div>
+          </div>
+          <div class="m-streak-placeholder"></div>
+          <div class="m-qa">
+            <div class="m-icon">🛡️</div>
+            <div class="m-svc">GuardDuty</div>
+            <div class="m-qtxt">このサービスの正式名称は？</div>
+            <div class="m-ans-btns">
+              <div class="m-btn ok">Amazon</div>
+              <div class="m-btn ng">AWS</div>
+            </div>
+          </div>
+          <div class="m-result ng-r">
+            <div class="m-verdict-row">
+              <div class="m-verdict ng-v">✗ 不正解</div>
+              <div class="m-next-inline-dark">次へ</div>
+            </div>
+            <div class="m-fullname">正式名称：Amazon GuardDuty</div>
+            <div class="m-desc">機械学習でAWSアカウントの脅威を検出するサービス。</div>
+          </div>
+        </div>
+      </div>
+      <div class="opt-meta">
+        <div class="meta-row con"><span class="meta-icon">✗</span><span>ダーク背景で不正解の赤背景に埋もれて視認しにくい</span></div>
+        <div class="meta-row con"><span class="meta-icon">✗</span><span>正解の緑背景でも同様に目立たない</span></div>
+        <div class="meta-row neutral"><span class="meta-icon">—</span><span>正解／不正解関係なく同じ暗い色のまま</span></div>
+      </div>
+    </div>
+
+    <!-- 変更後 -->
+    <div class="opt">
+      <div class="opt-label">
+        <span class="opt-name">変更後</span>
+        <span class="opt-tag">v1.7</span>
+        <span class="opt-badge implemented" style="margin-left:auto">✓ 実装済み</span>
+      </div>
+      <div class="phone-wrap">
+        <div class="phone">
+          <div class="m-qh">
+            <div class="m-qh-row">
+              <span class="m-qh-prog">問 10 / 20</span>
+              <span class="m-qh-score">スコア: 7/9</span>
+            </div>
+            <div class="m-prog-bar"><div class="m-prog-fill" style="width:50%"></div></div>
+          </div>
+          <div class="m-streak-placeholder"></div>
+          <div class="m-qa">
+            <div class="m-icon">🛡️</div>
+            <div class="m-svc">GuardDuty</div>
+            <div class="m-qtxt">このサービスの正式名称は？</div>
+            <div class="m-ans-btns">
+              <div class="m-btn ok">Amazon</div>
+              <div class="m-btn ng">AWS</div>
+            </div>
+          </div>
+          <div class="m-result ng-r">
+            <div class="m-verdict-row">
+              <div class="m-verdict ng-v">✗ 不正解</div>
+              <div class="m-next-inline-orange">次へ ›</div>
+            </div>
+            <div class="m-fullname">正式名称：Amazon GuardDuty</div>
+            <div class="m-desc">機械学習でAWSアカウントの脅威を検出するサービス。</div>
+          </div>
+        </div>
+      </div>
+      <div class="opt-meta">
+        <div class="meta-row pro"><span class="meta-icon">✓</span><span>AWS オレンジ (#FF9900) で正解・不正解どちらの背景でもはっきり見える</span></div>
+        <div class="meta-row pro"><span class="meta-icon">✓</span><span>パルスアニメーション（2秒周期）でタップを促す</span></div>
+        <div class="meta-row pro"><span class="meta-icon">✓</span><span>文字色 #000 でコントラスト比 ≥ 4.5:1 (WCAG AA準拠)</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── SECTION 2: ランク表示 ── -->
+<div class="section-wrap">
+  <div class="section-title">変更 2　ランク表示をスコア連動メッセージに変更</div>
+  <div class="grid grid-3">
+
+    <!-- 変更前: 100% -->
+    <div class="opt">
+      <div class="opt-label">
+        <span class="opt-name">変更前（100%）</span>
+        <span class="opt-tag">v1.6</span>
+      </div>
+      <div class="phone-wrap">
+        <div class="phone">
+          <div class="m-result-screen">
+            <div class="m-result-title">クイズ終了！</div>
+            <div class="m-score-area">
+              <div class="m-score-label">Score</div>
+              <div class="m-score-num">20/20</div>
+            </div>
+            <div class="m-detail-boxes">
+              <div class="m-detail-box">
+                <div class="m-detail-label">正答率</div>
+                <div class="m-detail-val">100%</div>
+              </div>
+              <div class="m-detail-box">
+                <div class="m-detail-label">ランク</div>
+                <div class="m-rank-old">🏆 AWS Naming Legend</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="opt-meta">
+        <div class="meta-row con"><span class="meta-icon">✗</span><span>絵文字+固定ランク名で感情的な盛り上がりが少ない</span></div>
+      </div>
+    </div>
+
+    <!-- 変更後: 100% -->
+    <div class="opt">
+      <div class="opt-label">
+        <span class="opt-name">変更後（100%）</span>
+        <span class="opt-tag">v1.7</span>
+        <span class="opt-badge implemented" style="margin-left:auto">✓</span>
+      </div>
+      <div class="phone-wrap">
+        <div class="phone">
+          <div class="m-result-screen">
+            <div class="m-result-title">クイズ終了！</div>
+            <div class="m-score-area">
+              <div class="m-score-label">Score</div>
+              <div class="m-score-num">20/20</div>
+            </div>
+            <div class="m-detail-boxes">
+              <div class="m-detail-box">
+                <div class="m-detail-label">正答率</div>
+                <div class="m-detail-val">100%</div>
+              </div>
+              <div class="m-detail-box">
+                <div class="m-detail-label">評価</div>
+                <div class="m-rank-new perfect">完璧！！</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="opt-meta">
+        <div class="meta-row pro"><span class="meta-icon">✓</span><span>感嘆符付きメッセージで達成感が出る</span></div>
+        <div class="meta-row pro"><span class="meta-icon">✓</span><span>オレンジ色でスコアと視覚的に連動</span></div>
+      </div>
+    </div>
+
+    <!-- 変更後: スコア別一覧 -->
+    <div class="opt">
+      <div class="opt-label">
+        <span class="opt-name">スコア別メッセージ</span>
+        <span class="opt-tag">対応表</span>
+      </div>
+      <div class="phone-wrap" style="background:var(--surface);">
+        <div style="width:100%;padding:0.5rem 0.75rem;font-size:0.7rem;">
+          <table style="width:100%;border-collapse:collapse;">
+            <thead>
+              <tr>
+                <th style="text-align:left;font-size:0.6rem;color:var(--muted);font-weight:700;text-transform:uppercase;padding:3px 4px;border-bottom:1px solid var(--border);">正答率</th>
+                <th style="text-align:left;font-size:0.6rem;color:var(--muted);font-weight:700;text-transform:uppercase;padding:3px 4px;border-bottom:1px solid var(--border);">JA</th>
+                <th style="text-align:left;font-size:0.6rem;color:var(--muted);font-weight:700;text-transform:uppercase;padding:3px 4px;border-bottom:1px solid var(--border);">EN</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="font-size:0.65rem;color:var(--text2);padding:4px;border-bottom:1px solid var(--border);">100%</td>
+                <td style="font-size:0.65rem;color:var(--accent);font-weight:700;padding:4px;border-bottom:1px solid var(--border);">完璧！！</td>
+                <td style="font-size:0.65rem;color:var(--accent);font-weight:700;padding:4px;border-bottom:1px solid var(--border);">Perfect!!</td>
+              </tr>
+              <tr>
+                <td style="font-size:0.65rem;color:var(--text2);padding:4px;border-bottom:1px solid var(--border);">95%+</td>
+                <td style="font-size:0.65rem;color:var(--accent);font-weight:700;padding:4px;border-bottom:1px solid var(--border);">素晴らしい！</td>
+                <td style="font-size:0.65rem;color:var(--accent);font-weight:700;padding:4px;border-bottom:1px solid var(--border);">Excellent!</td>
+              </tr>
+              <tr>
+                <td style="font-size:0.65rem;color:var(--text2);padding:4px;border-bottom:1px solid var(--border);">80%+</td>
+                <td style="font-size:0.65rem;color:#38B2C4;font-weight:700;padding:4px;border-bottom:1px solid var(--border);">なかなかいい！</td>
+                <td style="font-size:0.65rem;color:#38B2C4;font-weight:700;padding:4px;border-bottom:1px solid var(--border);">Well Done!</td>
+              </tr>
+              <tr>
+                <td style="font-size:0.65rem;color:var(--text2);padding:4px;border-bottom:1px solid var(--border);">60%+</td>
+                <td style="font-size:0.65rem;color:var(--text);font-weight:700;padding:4px;border-bottom:1px solid var(--border);">もう一息！</td>
+                <td style="font-size:0.65rem;color:var(--text);font-weight:700;padding:4px;border-bottom:1px solid var(--border);">Almost There!</td>
+              </tr>
+              <tr>
+                <td style="font-size:0.65rem;color:var(--text2);padding:4px;">60%未満</td>
+                <td style="font-size:0.65rem;color:var(--muted);font-weight:700;padding:4px;">まだまだこれから！</td>
+                <td style="font-size:0.65rem;color:var(--muted);font-weight:700;padding:4px;">Keep Going!</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="opt-meta">
+        <div class="meta-row neutral"><span class="meta-icon">→</span><span>5段階すべて日英対応</span></div>
+        <div class="meta-row neutral"><span class="meta-icon">→</span><span>色もスコアで変化（オレンジ→ティール→デフォルト→ミュート）</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── SECTION 3: ストリーク ── -->
+<div class="section-wrap">
+  <div class="section-title">変更 3　ストリークバッジのレイアウトシフト解消</div>
+  <div class="grid">
+
+    <!-- 変更前 -->
+    <div class="opt">
+      <div class="opt-label">
+        <span class="opt-name">変更前</span>
+        <span class="opt-tag">v1.6</span>
+      </div>
+      <div class="phone-wrap">
+        <div class="phone">
+          <div class="m-qh">
+            <div class="m-qh-row">
+              <span class="m-qh-prog">問 5 / 20</span>
+              <span class="m-qh-score">スコア: 4/4</span>
+            </div>
+            <div class="m-prog-bar"><div class="m-prog-fill" style="width:25%"></div></div>
+          </div>
+          <!-- no streak space reserved -->
+          <div class="m-qa">
+            <div class="m-icon">⚡</div>
+            <div class="m-svc">Lambda</div>
+            <div class="m-qtxt">このサービスの正式名称は？</div>
+            <div class="m-ans-btns">
+              <div class="m-btn ok">AWS</div>
+              <div class="m-btn ng">Amazon</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="opt-meta">
+        <div class="meta-row con"><span class="meta-icon">✗</span><span><code>display:none</code> → バッジ出現時にカード全体が下に押し下げられる</span></div>
+        <div class="meta-row con"><span class="meta-icon">✗</span><span>選択肢の位置が問題毎にずれ、タップミスの原因</span></div>
+      </div>
+    </div>
+
+    <!-- 変更後 -->
+    <div class="opt">
+      <div class="opt-label">
+        <span class="opt-name">変更後</span>
+        <span class="opt-tag">v1.7</span>
+        <span class="opt-badge implemented" style="margin-left:auto">✓ 実装済み</span>
+      </div>
+      <div class="phone-wrap">
+        <div class="phone">
+          <div class="m-qh">
+            <div class="m-qh-row">
+              <span class="m-qh-prog">問 5 / 20</span>
+              <span class="m-qh-score">スコア: 4/4</span>
+            </div>
+            <div class="m-prog-bar"><div class="m-prog-fill" style="width:25%"></div></div>
+          </div>
+          <!-- space always reserved -->
+          <div class="m-streak-wrap">
+            <div class="m-streak-badge">🔥 4問連続正解！</div>
+          </div>
+          <div class="m-qa">
+            <div class="m-icon">⚡</div>
+            <div class="m-svc">Lambda</div>
+            <div class="m-qtxt">このサービスの正式名称は？</div>
+            <div class="m-ans-btns">
+              <div class="m-btn ok">AWS</div>
+              <div class="m-btn ng">Amazon</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="opt-meta">
+        <div class="meta-row pro"><span class="meta-icon">✓</span><span><code>visibility:hidden</code> + <code>min-height</code> で高さを常時確保、バッジが出ても動かない</span></div>
+        <div class="meta-row pro"><span class="meta-icon">✓</span><span>選択肢の位置が固定され、すばやいタップ操作が安定</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── まとめ ── -->
+<div class="footnote">
+  <div class="footnote-title">まとめ ＆ 実装詳細</div>
+  <p><strong>①「次へ」ボタン:</strong> <code>.next-btn</code> を <code>background: var(--aws-orange)</code> / <code>color: #000</code> に変更し、<code>next-pulse</code> アニメーション（2秒周期のボックスシャドウ）を追加。正解・不正解どちらの背景色でも確実に目立つよう配慮。<code>prefers-reduced-motion</code> 対応で動作を止めるメディアクエリも追加済み。</p>
+  <br>
+  <p><strong>②ランク表示:</strong> <code>getRankMessage(score, total, lang)</code> を新設。パーセンテージに応じた日英メッセージと色を返す。結果画面の「ランク」ラベルを「評価」(<code>i18n.ts</code>)に変更し、絵文字ランク名から簡潔な感情メッセージへ切り替え。</p>
+  <br>
+  <p><strong>③ストリークバッジ:</strong> <code>.streak[hidden] { display: block !important; visibility: hidden; }</code> で要素サイズを確保しつつ非表示に。バッジの有無でカードの高さが変わらなくなり、連続正解中も選択肢の位置が安定する。</p>
+</div>
