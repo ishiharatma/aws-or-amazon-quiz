@@ -115,7 +115,7 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   width: 100%;
   padding-bottom: 1rem;
 }
@@ -483,6 +483,26 @@ main {
 .answer-result.incorrect {
   background: var(--incorrect-bg);
   border-color: var(--incorrect-border);
+}
+
+.verdict-next-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.verdict-next-row .result-verdict {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.verdict-next-row .next-btn {
+  width: auto;
+  min-height: 36px;
+  padding: 0.4rem 1.1rem;
+  font-size: 0.875rem;
+  flex-shrink: 0;
 }
 
 .result-verdict {

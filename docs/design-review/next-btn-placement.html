@@ -1,0 +1,578 @@
+<title>「次へ」ボタン配置 ＋ カード位置 — 設計比較</title>
+<style>
+/* ── トークン ── */
+:root {
+  --bg:       #F0F2F5;
+  --surface:  #FFFFFF;
+  --sf2:      #F8F9FA;
+  --border:   #E1E4E8;
+  --text:     #0D1117;
+  --text2:    #586069;
+  --muted:    #8B949E;
+  --accent:   #FF9900;
+  --dark:     #232F3E;
+  --dark2:    #1A2433;
+  --blue:     #1A73E8;
+  --ok:       #2EA043;
+  --ok-bg:    #E8F5E9;
+  --ok-bdr:   #81C784;
+  --ng:       #CF222E;
+  --ng-bg:    #FFEBEE;
+  --ng-bdr:   #EF9A9A;
+  --r:        10px;
+  --rs:       6px;
+  --btn-glow: 0 0 0 2px #FF9900, 0 0 12px 2px rgba(255,153,0,0.45);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:#0D1117;--surface:#161B22;--sf2:#1C2128;--border:#30363D;
+    --text:#E6EDF3;--text2:#8B949E;--muted:#6E7681;
+    --ok:#3FB950;--ok-bg:#0D2818;--ok-bdr:#238636;
+    --ng:#F85149;--ng-bg:#2D1117;--ng-bdr:#6E1B1B;
+  }
+}
+:root[data-theme="dark"] {
+  --bg:#0D1117;--surface:#161B22;--sf2:#1C2128;--border:#30363D;
+  --text:#E6EDF3;--text2:#8B949E;--muted:#6E7681;
+  --ok:#3FB950;--ok-bg:#0D2818;--ok-bdr:#238636;
+  --ng:#F85149;--ng-bg:#2D1117;--ng-bdr:#6E1B1B;
+}
+:root[data-theme="light"] {
+  --bg:#F0F2F5;--surface:#FFFFFF;--sf2:#F8F9FA;--border:#E1E4E8;
+  --text:#0D1117;--text2:#586069;--muted:#8B949E;
+  --ok:#2EA043;--ok-bg:#E8F5E9;--ok-bdr:#81C784;
+  --ng:#CF222E;--ng-bg:#FFEBEE;--ng-bdr:#EF9A9A;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Noto Sans JP', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100dvh;
+  padding: 2rem 1.25rem 3rem;
+}
+
+/* ── ページヘッダー ── */
+.pg-header {
+  max-width: 1000px;
+  margin: 0 auto 2.5rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border);
+}
+.pg-eyebrow {
+  font-size: 0.72rem;font-weight:700;letter-spacing:0.1em;
+  text-transform:uppercase;color:var(--accent);margin-bottom:0.4rem;
+}
+.pg-title { font-size:1.5rem;font-weight:800;letter-spacing:-0.02em;margin-bottom:0.4rem; }
+.pg-sub { font-size:0.875rem;color:var(--text2);line-height:1.6; }
+
+/* ── セクションタイトル ── */
+.section-title {
+  max-width: 1000px;
+  margin: 0 auto 1rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.section-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+.section-wrap { margin-bottom: 2.5rem; }
+
+/* ── グリッド ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 700px) {
+  .grid { grid-template-columns: 1fr; }
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 400px) {
+  .grid-4 { grid-template-columns: 1fr; }
+}
+
+/* ── オプションカード ── */
+.opt {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  overflow: hidden;
+}
+.opt-label {
+  background: var(--dark);
+  padding: 0.6rem 0.875rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+.opt-tag {
+  font-size:0.6rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;
+  background:rgba(255,153,0,0.2);color:var(--accent);
+  border:1px solid rgba(255,153,0,0.3);border-radius:100px;padding:0.12rem 0.45rem;
+}
+.opt-name { font-size:0.875rem;font-weight:700;color:#fff; }
+.opt-badge {
+  font-size:0.6rem;font-weight:600;
+  background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.55);
+  border-radius:100px;padding:0.1rem 0.4rem;margin-left:auto;
+}
+.opt-badge.implemented {
+  background: rgba(63,185,80,0.2);
+  color: #3FB950;
+  border: 1px solid rgba(63,185,80,0.3);
+}
+
+/* ── フォンモックアップ共通 ── */
+.phone-wrap {
+  padding:0.875rem;
+  display:flex;justify-content:center;
+  background:var(--sf2);border-bottom:1px solid var(--border);
+}
+.phone {
+  width: 180px;
+  background:var(--surface);
+  border:1.5px solid var(--border);
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 4px 18px rgba(0,0,0,0.13);
+}
+
+/* mock quiz header */
+.m-qh { background:var(--dark);padding:4px 7px;display:flex;flex-direction:column;gap:3px; }
+.m-qh-row { display:flex;justify-content:space-between; }
+.m-qh-prog { font-size:5.5px;color:rgba(255,255,255,0.85);font-weight:600; }
+.m-qh-score { font-size:5.5px;color:var(--accent);font-weight:700; }
+.m-prog-bar { height:2px;background:rgba(255,255,255,0.15);border-radius:2px;overflow:hidden; }
+.m-prog-fill { height:100%;width:50%;background:var(--accent); }
+
+/* mock question */
+.m-qa { padding:8px 8px 5px;text-align:center; }
+.m-icon {
+  width:24px;height:24px;margin:0 auto 4px;border-radius:5px;
+  background:#232F3E;display:flex;align-items:center;justify-content:center;font-size:12px;
+}
+.m-svc { font-size:8px;font-weight:800;color:var(--text);margin-bottom:2px;letter-spacing:-0.01em; }
+.m-qtxt { font-size:5.5px;color:var(--text2);margin-bottom:5px; }
+.m-ans-btns { display:grid;grid-template-columns:1fr 1fr;gap:3px; }
+.m-btn { padding:5px 3px;border-radius:3px;font-size:6.5px;font-weight:800;text-align:center;border:1.5px solid; }
+.m-btn.ok  { background:var(--ok-bg);border-color:var(--ok);color:var(--ok); }
+.m-btn.ng  { background:var(--ng-bg);border-color:var(--ng);color:var(--ng); }
+
+/* mock result */
+.m-result { border-top:1px solid var(--border);padding:6px 8px 6px; }
+.m-result.ng-r { background:var(--ng-bg);border-color:var(--ng-bdr); }
+.m-verdict { font-size:6.5px;font-weight:800;color:var(--ng);margin-bottom:2px; }
+.m-fullname { font-size:5.5px;font-weight:700;color:var(--text);margin-bottom:2px; }
+.m-desc { font-size:5px;color:var(--text2);line-height:1.5;margin-bottom:3px; }
+.m-link {
+  display:inline-flex;align-items:center;gap:2px;
+  border:1px solid var(--blue);border-radius:100px;
+  color:var(--blue);font-size:4.5px;font-weight:600;padding:1px 3px;margin-bottom:4px;
+}
+.m-next {
+  display:block;width:100%;background:var(--dark);color:#fff;
+  border-radius:3px;font-size:6.5px;font-weight:700;padding:4px;text-align:center;
+}
+.m-next.hl { box-shadow:var(--btn-glow);position:relative;z-index:1; }
+.m-verdict-row { display:flex;align-items:center;justify-content:space-between;margin-bottom:2px;gap:3px; }
+.m-next-inline {
+  background:var(--dark);color:#fff;border-radius:3px;
+  font-size:5.5px;font-weight:700;padding:2px 5px;
+  white-space:nowrap;flex-shrink:0;box-shadow:var(--btn-glow);
+}
+.m-qa-nopb { padding:8px 8px 0;text-align:center; }
+.m-between { padding:3px 8px; }
+.m-next-between {
+  display:block;width:100%;background:var(--dark);color:#fff;
+  border-radius:3px;font-size:6.5px;font-weight:700;padding:4px;text-align:center;
+  box-shadow:var(--btn-glow);
+}
+
+/* プロコン */
+.opt-meta { padding:0.75rem 0.875rem 0.875rem;display:flex;flex-direction:column;gap:0.4rem; }
+.meta-row { display:flex;gap:0.4rem;font-size:0.75rem;line-height:1.5;color:var(--text2); }
+.meta-icon { flex-shrink:0;margin-top:0.05em; }
+.meta-row.pro .meta-icon { color:var(--ok); }
+.meta-row.con .meta-icon { color:var(--ng); }
+.meta-row.neutral .meta-icon { color:var(--muted); }
+
+/* ── レイアウト比較（スクロール問題） ── */
+.layout-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+@media (max-width: 600px) { .layout-grid { grid-template-columns: 1fr; } }
+
+/* スクリーン全体のシミュレーション */
+.screen-sim {
+  background: var(--sf2);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  overflow: hidden;
+}
+.sim-label {
+  background: var(--dark);
+  padding: 0.6rem 0.875rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+.sim-body {
+  height: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.5rem;
+  position: relative;
+}
+.sim-body.center-mode { justify-content: center; }
+.sim-body.top-mode    { justify-content: flex-start; padding-top: 0.5rem; }
+
+.sim-phone {
+  width: 150px;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.12);
+}
+
+/* アニメーション: カードがジャンプする様子 */
+@keyframes jump-card {
+  0%   { transform: translateY(0); }
+  30%  { transform: translateY(-12px); }
+  55%  { transform: translateY(-10px); }
+  80%  { transform: translateY(-11px); }
+  100% { transform: translateY(-10px); }
+}
+@keyframes grow-down {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(0); }
+}
+.sim-body.center-mode .sim-phone { animation: jump-card 1.6s ease-out 0.5s 1 forwards; }
+.sim-body.top-mode    .sim-phone { animation: grow-down 1.6s ease-out 0.5s 1 forwards; }
+
+@media (prefers-reduced-motion: reduce) {
+  .sim-body.center-mode .sim-phone,
+  .sim-body.top-mode    .sim-phone { animation: none; }
+  .sim-body.center-mode .sim-phone { transform: translateY(-10px); }
+}
+
+.m-result-appear {
+  border-top:1px solid var(--border);
+  padding:4px 7px 5px;
+  background: var(--ng-bg);
+  border-color: var(--ng-bdr);
+}
+
+.arrow-label {
+  position: absolute;
+  right: 0.5rem;
+  font-size: 0.65rem;
+  color: var(--ng);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+.arrow-label.top-arrow { top: 1.2rem; }
+.arrow-label.bottom-arrow { bottom: 1.2rem; }
+.arrow-label.down-arrow { bottom: 1.2rem; color: var(--ok); }
+
+.sim-meta { padding: 0.75rem 0.875rem 0.875rem; display:flex;flex-direction:column;gap:0.4rem; }
+
+/* ── フッターノート ── */
+.footnote {
+  max-width: 1000px;
+  margin: 2rem auto 0;
+  padding: 1rem 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  font-size: 0.8rem;
+  color: var(--text2);
+  line-height: 1.7;
+}
+.footnote strong { color: var(--text); }
+.footnote-title {
+  font-size: 0.7rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:0.4rem;
+}
+</style>
+
+<div class="pg-header">
+  <div class="pg-eyebrow">UX Design Review</div>
+  <h1 class="pg-title">「次へ」ボタン配置 ＋ カード位置 — 設計比較</h1>
+  <p class="pg-sub">2つの課題を合わせて検討：① 回答後にカードが上下にジャンプする問題　② 「次へ」ボタンが選択肢から遠い問題</p>
+</div>
+
+<!-- ── SECTION 1: カードのジャンプ問題 ── -->
+<div class="section-wrap">
+  <div class="section-title">課題 1　カードが上下にジャンプする</div>
+  <div class="layout-grid">
+
+    <!-- 現状: center -->
+    <div class="screen-sim">
+      <div class="sim-label">
+        <span class="opt-name">現状 — 垂直中央</span>
+        <span class="opt-tag">Current</span>
+        <span class="opt-badge" style="margin-left:auto">justify-content: center</span>
+      </div>
+      <div class="sim-body center-mode">
+        <div class="arrow-label top-arrow">↑ 上にずれる</div>
+        <div class="sim-phone">
+          <div class="m-qh">
+            <div class="m-qh-row">
+              <span class="m-qh-prog">問 2 / 20</span>
+              <span class="m-qh-score">スコア: 0/20</span>
+            </div>
+            <div class="m-prog-bar"><div class="m-prog-fill" style="width:10%"></div></div>
+          </div>
+          <div class="m-qa">
+            <div class="m-icon">☁️</div>
+            <div class="m-svc">DataSync</div>
+            <div class="m-qtxt">このサービスの正式名称は？</div>
+            <div class="m-ans-btns">
+              <div class="m-btn ok">AWS</div>
+              <div class="m-btn ng">Amazon</div>
+            </div>
+          </div>
+          <div class="m-result-appear">
+            <div class="m-verdict">✗ 不正解</div>
+            <div class="m-fullname">正式名称：AWS DataSync</div>
+            <div class="m-desc">オンプレミスとAWS間でデータを高速・安全に転送できるオンラインデータ移動サービス。</div>
+            <div class="m-next">次へ</div>
+          </div>
+        </div>
+        <div class="arrow-label bottom-arrow">↓ 下にもずれる</div>
+      </div>
+      <div class="sim-meta">
+        <div class="meta-row con"><span class="meta-icon">✗</span><span>結果セクションが展開するたびカード全体が上方向に押し上げられる</span></div>
+        <div class="meta-row con"><span class="meta-icon">✗</span><span>目線が追いかけるカードと指の位置がずれてタップミスの原因になる</span></div>
+      </div>
+    </div>
+
+    <!-- 修正案: flex-start -->
+    <div class="screen-sim">
+      <div class="sim-label">
+        <span class="opt-name">修正案 — 上寄せ</span>
+        <span class="opt-tag">Fix</span>
+        <span class="opt-badge implemented" style="margin-left:auto">✓ 実装済み</span>
+      </div>
+      <div class="sim-body top-mode">
+        <div class="sim-phone">
+          <div class="m-qh">
+            <div class="m-qh-row">
+              <span class="m-qh-prog">問 2 / 20</span>
+              <span class="m-qh-score">スコア: 0/20</span>
+            </div>
+            <div class="m-prog-bar"><div class="m-prog-fill" style="width:10%"></div></div>
+          </div>
+          <div class="m-qa">
+            <div class="m-icon">☁️</div>
+            <div class="m-svc">DataSync</div>
+            <div class="m-qtxt">このサービスの正式名称は？</div>
+            <div class="m-ans-btns">
+              <div class="m-btn ok">AWS</div>
+              <div class="m-btn ng">Amazon</div>
+            </div>
+          </div>
+          <div class="m-result-appear">
+            <div class="m-verdict">✗ 不正解</div>
+            <div class="m-fullname">正式名称：AWS DataSync</div>
+            <div class="m-desc">オンプレミスとAWS間でデータを高速・安全に転送できるオンラインデータ移動サービス。</div>
+            <div class="m-next">次へ</div>
+          </div>
+        </div>
+        <div class="arrow-label down-arrow">↓ 下方向だけに展開</div>
+      </div>
+      <div class="sim-meta">
+        <div class="meta-row pro"><span class="meta-icon">✓</span><span>カードの上端が固定され、結果が出ても位置がずれない</span></div>
+        <div class="meta-row pro"><span class="meta-icon">✓</span><span>CSS 1行変更のみ（<code style="font-family:monospace;font-size:0.7rem;background:var(--sf2);padding:1px 3px;border-radius:3px">justify-content: flex-start</code>）で PC・スマホ共通に効く</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── SECTION 2: 次へボタンの位置 ── -->
+<div class="section-wrap">
+  <div class="section-title">課題 2　「次へ」ボタンを選択肢に近づける</div>
+  <div class="grid grid-4">
+
+    <!-- 現状 -->
+    <div class="opt">
+      <div class="opt-label">
+        <span class="opt-name">現状</span>
+        <span class="opt-badge" style="margin-left:auto">基準</span>
+      </div>
+      <div class="phone-wrap">
+        <div class="phone">
+          <div class="m-qh">
+            <div class="m-qh-row"><span class="m-qh-prog">問 10 / 20</span><span class="m-qh-score">スコア: 6/9</span></div>
+            <div class="m-prog-bar"><div class="m-prog-fill"></div></div>
+          </div>
+          <div class="m-qa">
+            <div class="m-icon">🛡️</div>
+            <div class="m-svc">GuardDuty</div>
+            <div class="m-qtxt">このサービスの正式名称は？</div>
+            <div class="m-ans-btns">
+              <div class="m-btn ok">Amazon</div>
+              <div class="m-btn ng">AWS</div>
+            </div>
+          </div>
+          <div class="m-result ng-r">
+            <div class="m-verdict">✗ 不正解</div>
+            <div class="m-fullname">正式名称：Amazon GuardDuty</div>
+            <div class="m-desc">機械学習を使ってAWSアカウントとワークロードへの脅威を継続的に検出するサービス。</div>
+            <div class="m-link">↗ AWS公式ページ</div>
+            <div class="m-next">次へ</div>
+          </div>
+        </div>
+      </div>
+      <div class="opt-meta">
+        <div class="meta-row con"><span class="meta-icon">✗</span><span>解説の下に埋もれる</span></div>
+      </div>
+    </div>
+
+    <!-- 案A -->
+    <div class="opt">
+      <div class="opt-label">
+        <span class="opt-name">案 A</span>
+        <span class="opt-tag">結果先頭</span>
+      </div>
+      <div class="phone-wrap">
+        <div class="phone">
+          <div class="m-qh">
+            <div class="m-qh-row"><span class="m-qh-prog">問 10 / 20</span><span class="m-qh-score">スコア: 6/9</span></div>
+            <div class="m-prog-bar"><div class="m-prog-fill"></div></div>
+          </div>
+          <div class="m-qa">
+            <div class="m-icon">🛡️</div>
+            <div class="m-svc">GuardDuty</div>
+            <div class="m-qtxt">このサービスの正式名称は？</div>
+            <div class="m-ans-btns">
+              <div class="m-btn ok">Amazon</div>
+              <div class="m-btn ng">AWS</div>
+            </div>
+          </div>
+          <div class="m-result ng-r">
+            <div class="m-verdict">✗ 不正解</div>
+            <div class="m-next hl" style="margin-bottom:3px">次へ</div>
+            <div class="m-fullname">正式名称：Amazon GuardDuty</div>
+            <div class="m-desc">機械学習を使ってAWSアカウントとワークロードへの脅威を継続的に検出するサービス。</div>
+            <div class="m-link">↗ AWS公式ページ</div>
+          </div>
+        </div>
+      </div>
+      <div class="opt-meta">
+        <div class="meta-row pro"><span class="meta-icon">✓</span><span>判定直後にボタンが見える</span></div>
+        <div class="meta-row pro"><span class="meta-icon">✓</span><span>HTML変更のみ、PC共通</span></div>
+        <div class="meta-row con"><span class="meta-icon">△</span><span>解説より先にボタンが来る</span></div>
+      </div>
+    </div>
+
+    <!-- 案B -->
+    <div class="opt">
+      <div class="opt-label">
+        <span class="opt-name">案 B</span>
+        <span class="opt-tag">横並び</span>
+      </div>
+      <div class="phone-wrap">
+        <div class="phone">
+          <div class="m-qh">
+            <div class="m-qh-row"><span class="m-qh-prog">問 10 / 20</span><span class="m-qh-score">スコア: 6/9</span></div>
+            <div class="m-prog-bar"><div class="m-prog-fill"></div></div>
+          </div>
+          <div class="m-qa">
+            <div class="m-icon">🛡️</div>
+            <div class="m-svc">GuardDuty</div>
+            <div class="m-qtxt">このサービスの正式名称は？</div>
+            <div class="m-ans-btns">
+              <div class="m-btn ok">Amazon</div>
+              <div class="m-btn ng">AWS</div>
+            </div>
+          </div>
+          <div class="m-result ng-r">
+            <div class="m-verdict-row">
+              <div class="m-verdict" style="margin-bottom:0">✗ 不正解</div>
+              <div class="m-next-inline">次へ →</div>
+            </div>
+            <div class="m-fullname">正式名称：Amazon GuardDuty</div>
+            <div class="m-desc">機械学習を使ってAWSアカウントとワークロードへの脅威を継続的に検出するサービス。</div>
+            <div class="m-link">↗ AWS公式ページ</div>
+          </div>
+        </div>
+      </div>
+      <div class="opt-meta">
+        <div class="meta-row pro"><span class="meta-icon">✓</span><span>縦スペース増やさず判定と同時に表示</span></div>
+        <div class="meta-row pro"><span class="meta-icon">✓</span><span>解説が自然な順序で読める</span></div>
+        <div class="meta-row con"><span class="meta-icon">△</span><span>ボタンが小さくなりタップしにくい</span></div>
+      </div>
+    </div>
+
+    <!-- 案C -->
+    <div class="opt">
+      <div class="opt-label">
+        <span class="opt-name">案 C</span>
+        <span class="opt-tag">選択肢直下</span>
+      </div>
+      <div class="phone-wrap">
+        <div class="phone">
+          <div class="m-qh">
+            <div class="m-qh-row"><span class="m-qh-prog">問 10 / 20</span><span class="m-qh-score">スコア: 6/9</span></div>
+            <div class="m-prog-bar"><div class="m-prog-fill"></div></div>
+          </div>
+          <div class="m-qa-nopb">
+            <div class="m-icon">🛡️</div>
+            <div class="m-svc">GuardDuty</div>
+            <div class="m-qtxt">このサービスの正式名称は？</div>
+            <div class="m-ans-btns">
+              <div class="m-btn ok">Amazon</div>
+              <div class="m-btn ng">AWS</div>
+            </div>
+          </div>
+          <div class="m-between">
+            <div class="m-next-between" style="margin-top:3px">次へ</div>
+          </div>
+          <div class="m-result ng-r" style="padding-top:4px">
+            <div class="m-verdict">✗ 不正解</div>
+            <div class="m-fullname">正式名称：Amazon GuardDuty</div>
+            <div class="m-desc">機械学習を使ってAWSアカウントとワークロードへの脅威を継続的に検出するサービス。</div>
+            <div class="m-link">↗ AWS公式ページ</div>
+          </div>
+        </div>
+      </div>
+      <div class="opt-meta">
+        <div class="meta-row pro"><span class="meta-icon">✓</span><span>選択肢の直下で操作距離が最短</span></div>
+        <div class="meta-row con"><span class="meta-icon">△</span><span>JS変更が必要（動的挿入）</span></div>
+        <div class="meta-row con"><span class="meta-icon">△</span><span>回答前にボタン領域のスペースをどうするか要検討</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── まとめ ── -->
+<div class="footnote" style="max-width:1000px">
+  <div class="footnote-title">まとめ ＆ 推奨</div>
+  <p><strong>課題1（カードジャンプ）は実装済み。</strong> <code style="font-family:monospace;font-size:0.85em;background:var(--sf2);padding:1px 4px;border-radius:3px">main { justify-content: flex-start }</code> に変更し、カードが上端に固定されて下方向だけに展開するようになりました。</p>
+  <br>
+  <p><strong>課題2（「次へ」の位置）は案Aまたは案Bを推奨。</strong> HTMLのボタン順序を変えるだけで対応でき、PCとスマホで共通に効果が出ます。案Aはタップしやすいフルwidth、案Bは縦スペースを増やさずにコンパクト。案Cは操作距離が最短ですが、JSの変更が伴います。</p>
+</div>
