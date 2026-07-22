@@ -7,6 +7,7 @@ import { renderResult } from './result';
 let lang: Lang = getLang();
 let state: QuizState | null = null;
 let allServices: Service[] = [];
+let buttonSwapped = false;
 
 async function loadServices(): Promise<Service[]> {
   const resp = await fetch('./data/services.json');
@@ -49,12 +50,10 @@ function renderQuestion(): void {
   const quizEl = document.getElementById('quiz-screen')!;
 
   // Progress
-  const progressText = lang === 'ja'
-    ? `${t(lang, 'question_label')} ${idx + 1} ${t(lang, 'question_of')} ${total}`
-    : `${t(lang, 'question_label')} ${idx + 1} ${t(lang, 'question_of')} ${total}`;
+  const progressText = `${t(lang, 'question_label')} ${idx + 1} ${t(lang, 'question_of')} ${total}`;
   ($('.progress-text', quizEl) as HTMLElement).textContent = progressText;
   ($('.score-text', quizEl) as HTMLElement).textContent =
-    `${t(lang, 'score')}: ${state.score}/${idx}`;
+    `${t(lang, 'score')}: ${state.score}/${total}`;
   const fill = $('.progress-fill', quizEl) as HTMLElement;
   fill.style.width = `${(idx / total) * 100}%`;
 
@@ -107,6 +106,23 @@ function renderQuestion(): void {
   amazonBtn.setAttribute('aria-pressed', 'false');
   awsBtn.setAttribute('aria-pressed', 'false');
 
+  // Occasionally swap button order (approx 25% chance)
+  buttonSwapped = Math.random() < 0.25;
+  const answerBtnsEl = $('.answer-btns', quizEl) as HTMLElement;
+  if (buttonSwapped) {
+    answerBtnsEl.prepend(awsBtn);
+  } else {
+    answerBtnsEl.prepend(amazonBtn);
+  }
+
+  // Update keyboard hint
+  const kbHint = $('.keyboard-hint', quizEl) as HTMLElement;
+  if (buttonSwapped) {
+    kbHint.innerHTML = `<kbd>1</kbd> AWS &nbsp;|&nbsp; <kbd>2</kbd> Amazon &nbsp;|&nbsp; <kbd>Enter</kbd> ${t(lang, 'next')}`;
+  } else {
+    kbHint.innerHTML = `<kbd>1</kbd> Amazon &nbsp;|&nbsp; <kbd>2</kbd> AWS &nbsp;|&nbsp; <kbd>Enter</kbd> ${t(lang, 'next')}`;
+  }
+
   // Reset answer area
   const answerArea = $('.answer-result', quizEl) as HTMLElement;
   answerArea.hidden = true;
@@ -155,7 +171,7 @@ function handleAnswer(answer: 'Amazon' | 'AWS'): void {
 
   // Update score display
   ($('.score-text', quizEl) as HTMLElement).textContent =
-    `${t(lang, 'score')}: ${state.score}/${state.currentIndex + 1}`;
+    `${t(lang, 'score')}: ${state.score}/${state.services.length}`;
 
   // Show answer result
   const answerArea = $('.answer-result', quizEl) as HTMLElement;
@@ -254,8 +270,12 @@ function bindEvents(): void {
     const active = document.querySelector('.screen.active')?.id;
     if (active === 'quiz-screen') {
       if (!state?.answered) {
-        if (e.key === '1' || e.key.toLowerCase() === 'a') handleAnswer('Amazon');
-        if (e.key === '2' || e.key.toLowerCase() === 'w') handleAnswer('AWS');
+        const firstAnswer = buttonSwapped ? 'AWS' : 'Amazon';
+        const secondAnswer = buttonSwapped ? 'Amazon' : 'AWS';
+        if (e.key === '1') handleAnswer(firstAnswer);
+        if (e.key === '2') handleAnswer(secondAnswer);
+        if (e.key.toLowerCase() === 'a') handleAnswer('Amazon');
+        if (e.key.toLowerCase() === 'w') handleAnswer('AWS');
       } else {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();

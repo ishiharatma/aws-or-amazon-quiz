@@ -928,5 +928,15 @@
     "descriptionJa": "AWSへのアプリケーション移行状況を一元的に追跡・管理できるサービス。",
     "descriptionEn": "Single place to track application migrations to AWS across multiple migration tools.",
     "icon": "migration-hub.svg"
+  },
+  {
+    "id": "amazon-shopping",
+    "prefix": "Amazon",
+    "name": "Amazon.com",
+    "fullName": "Amazon（ECサイト）",
+    "category": "other",
+    "descriptionJa": "世界最大のEコマースプラットフォーム。AWSとは別のビジネスですが、同じAmazon社が運営しています。",
+    "descriptionEn": "The world's largest e-commerce platform. A separate business from AWS, but both operated by Amazon.",
+    "icon": "amazon-box.svg"
   }
 ]
