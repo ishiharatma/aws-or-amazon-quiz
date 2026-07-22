@@ -354,8 +354,8 @@
   {
     "id": "quicksight",
     "prefix": "Amazon",
-    "name": "QuickSight",
-    "fullName": "Amazon QuickSight",
+    "name": "Quick Sight",
+    "fullName": "Amazon Quick Sight",
     "category": "analytics",
     "descriptionJa": "クラウドネイティブのビジネスインテリジェンス（BI）サービス。インタラクティブなダッシュボードを構築できる。",
     "descriptionEn": "Cloud-native business intelligence service for creating interactive dashboards and reports.",
