@@ -1,7 +1,7 @@
 import { Service, QuizState, Lang } from './types';
 import { createQuiz, CATEGORY_COLORS, CATEGORY_ICONS } from './quiz';
 // CATEGORY_COLORS and CATEGORY_ICONS used as emoji+color fallback when icon image fails to load
-import { getLang, t } from './i18n';
+import { getLang, t, tFormat } from './i18n';
 import { renderResult } from './result';
 
 let lang: Lang = getLang();
@@ -39,6 +39,14 @@ function updateStaticTexts(): void {
   const langBtn = document.getElementById('lang-toggle') as HTMLButtonElement;
   langBtn.textContent = t(lang, 'lang_toggle');
   langBtn.setAttribute('aria-label', lang === 'ja' ? 'Switch to English' : '日本語に切り替え');
+
+  if (allServices.length > 0) {
+    ($('.service-count-text', startEl) as HTMLElement).textContent =
+      tFormat(lang, 'service_total', { count: allServices.length });
+  }
+
+  const linkTextEl = $('.service-link-text', quizEl) as HTMLElement | null;
+  if (linkTextEl) linkTextEl.textContent = t(lang, 'service_page');
 }
 
 function renderQuestion(): void {
@@ -128,6 +136,10 @@ function renderQuestion(): void {
   answerArea.hidden = true;
   answerArea.className = 'answer-result';
 
+  // Service link
+  const serviceLinkEl = $('.service-link', quizEl) as HTMLAnchorElement;
+  serviceLinkEl.hidden = true;
+
   // Next button
   const nextBtn = $('.next-btn', quizEl) as HTMLButtonElement;
   nextBtn.hidden = true;
@@ -184,6 +196,16 @@ function handleAnswer(answer: 'Amazon' | 'AWS'): void {
     `${t(lang, 'full_name_label')}${service.fullName}`;
   ($('.service-description', quizEl) as HTMLElement).textContent =
     lang === 'ja' ? service.descriptionJa : service.descriptionEn;
+
+  // Service link
+  const serviceLinkEl = $('.service-link', quizEl) as HTMLAnchorElement;
+  if (service.url) {
+    serviceLinkEl.href = service.url;
+    ($('.service-link-text', quizEl) as HTMLElement).textContent = t(lang, 'service_page');
+    serviceLinkEl.hidden = false;
+  } else {
+    serviceLinkEl.hidden = true;
+  }
 
   // Show streak if fresh milestone
   if (correct && state.streak >= 3) {
@@ -253,6 +275,10 @@ function bindEvents(): void {
         `${t(lang, 'full_name_label')}${service.fullName}`;
       ($('.service-description', quizEl) as HTMLElement).textContent =
         lang === 'ja' ? service.descriptionJa : service.descriptionEn;
+      const linkEl = $('.service-link', quizEl) as HTMLAnchorElement;
+      if (!linkEl.hidden) {
+        ($('.service-link-text', quizEl) as HTMLElement).textContent = t(lang, 'service_page');
+      }
       ($('.question-text', quizEl) as HTMLElement).textContent = t(lang, 'question_text');
       const isLast = state.currentIndex === state.services.length - 1;
       ($('.next-btn', quizEl) as HTMLButtonElement).textContent =
@@ -301,6 +327,9 @@ async function init(): Promise<void> {
   updateStaticTexts();
   bindEvents();
   showScreen('start-screen');
+  const startEl = document.getElementById('start-screen')!;
+  ($('.service-count-text', startEl) as HTMLElement).textContent =
+    tFormat(lang, 'service_total', { count: allServices.length });
 }
 
 init();

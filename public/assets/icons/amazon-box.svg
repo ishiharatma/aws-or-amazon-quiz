@@ -2,7 +2,7 @@
   <!-- Box body -->
   <rect x="12" y="38" width="76" height="52" rx="3" fill="#E8A020"/>
   <!-- Box body shading right -->
-  <rect x="72" y="38" width="16" height="52" rx="0" fill="#C8840C" rx="3"/>
+  <rect x="72" y="38" width="16" height="52" fill="#C8840C" rx="3"/>
   <!-- Box top left flap -->
   <rect x="12" y="25" width="35" height="15" rx="2" fill="#F0B030"/>
   <!-- Box top right flap -->
