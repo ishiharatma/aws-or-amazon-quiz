@@ -1,5 +1,5 @@
 import { QuizState, Lang } from './types';
-import { getRank, getRankEmoji } from './quiz';
+import { getRankMessage } from './quiz';
 import { t, tFormat } from './i18n';
 
 export function renderResult(state: QuizState, lang: Lang): void {
@@ -7,7 +7,6 @@ export function renderResult(state: QuizState, lang: Lang): void {
   const total = state.services.length;
   const score = state.score;
   const pct = Math.round((score / total) * 100);
-  const rank = getRank(score, total);
 
   const finalScoreEl = el.querySelector('.final-score');
   const accuracyEl = el.querySelector('.accuracy-value');
@@ -25,7 +24,9 @@ export function renderResult(state: QuizState, lang: Lang): void {
   if (accuracyEl) accuracyEl.textContent = `${pct}%`;
   if (rankNameEl) rankNameEl.textContent = t(lang, 'rank_label');
   if (rankLabelEl) {
-    rankLabelEl.textContent = `${getRankEmoji(rank)} ${t(lang, `ranks.${rank}`)}`;
+    const msg = getRankMessage(score, total, lang);
+    rankLabelEl.textContent = msg.main;
+    (rankLabelEl as HTMLElement).style.color = msg.color;
   }
   if (playAgainBtn) playAgainBtn.textContent = t(lang, 'play_again');
   if (shareBtnText) shareBtnText.textContent = t(lang, 'share_on_x');

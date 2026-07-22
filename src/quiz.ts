@@ -45,6 +45,24 @@ export function getRankEmoji(rank: Rank): string {
   return map[rank];
 }
 
+export interface RankMessage {
+  main: string;
+  color: string;
+}
+
+export function getRankMessage(score: number, total: number, lang: 'ja' | 'en'): RankMessage {
+  const pct = (score / total) * 100;
+  const messages: Array<{ min: number; ja: string; en: string; color: string }> = [
+    { min: 100, ja: '完璧！！',         en: 'Perfect!!',       color: '#FF9900' },
+    { min: 95,  ja: '素晴らしい！',     en: 'Excellent!',      color: '#FF9900' },
+    { min: 80,  ja: 'なかなかいい！',   en: 'Well Done!',      color: '#38B2C4' },
+    { min: 60,  ja: 'もう一息！',       en: 'Almost There!',   color: 'var(--text-primary)' },
+    { min: 0,   ja: 'まだまだこれから！', en: 'Keep Going!',    color: 'var(--text-muted)' },
+  ];
+  const m = messages.find(x => pct >= x.min)!;
+  return { main: lang === 'ja' ? m.ja : m.en, color: m.color };
+}
+
 export const CATEGORY_COLORS: Record<string, string> = {
   compute:    '#FF9900',
   storage:    '#3F8624',

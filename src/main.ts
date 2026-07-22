@@ -219,7 +219,7 @@ function handleAnswer(answer: 'Amazon' | 'AWS'): void {
   // Next button
   const nextBtn = $('.next-btn', quizEl) as HTMLButtonElement;
   const isLast = state.currentIndex === state.services.length - 1;
-  nextBtn.textContent = isLast ? t(lang, 'see_results') : t(lang, 'next');
+  nextBtn.textContent = isLast ? t(lang, 'see_results') : `${t(lang, 'next')} ›`;
   nextBtn.hidden = false;
   nextBtn.focus();
 }
@@ -282,7 +282,7 @@ function bindEvents(): void {
       ($('.question-text', quizEl) as HTMLElement).textContent = t(lang, 'question_text');
       const isLast = state.currentIndex === state.services.length - 1;
       ($('.next-btn', quizEl) as HTMLButtonElement).textContent =
-        isLast ? t(lang, 'see_results') : t(lang, 'next');
+        isLast ? t(lang, 'see_results') : `${t(lang, 'next')} ›`;
     }
     // Re-render result screen if visible
     const resultScreen = document.getElementById('result-screen')!;
