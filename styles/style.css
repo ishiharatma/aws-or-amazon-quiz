@@ -333,6 +333,14 @@ main {
   color: var(--aws-orange);
   padding: 0.25rem;
   animation: pop 0.3s ease;
+  min-height: 2rem;
+}
+
+.streak[hidden] {
+  display: block !important;
+  visibility: hidden;
+  animation: none;
+  pointer-events: none;
 }
 
 @keyframes pop {
@@ -499,10 +507,20 @@ main {
 
 .verdict-next-row .next-btn {
   width: auto;
-  min-height: 36px;
-  padding: 0.4rem 1.1rem;
-  font-size: 0.875rem;
+  min-height: 40px;
+  padding: 0.45rem 1.2rem;
+  font-size: 0.9rem;
   flex-shrink: 0;
+  animation: next-pulse 2s ease-in-out infinite;
+}
+
+@keyframes next-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 153, 0, 0); }
+  50%       { box-shadow: 0 0 0 5px rgba(255, 153, 0, 0.38); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .verdict-next-row .next-btn { animation: none; }
 }
 
 .result-verdict {
@@ -556,12 +574,12 @@ main {
 
 .next-btn {
   width: 100%;
-  background: var(--aws-dark);
-  color: #fff;
+  background: var(--aws-orange);
+  color: #000;
   border: none;
   border-radius: var(--radius-sm);
   font-size: 0.95rem;
-  font-weight: 700;
+  font-weight: 800;
   padding: 0.875rem;
   cursor: pointer;
   min-height: 48px;
@@ -569,7 +587,7 @@ main {
 }
 
 .next-btn:hover {
-  background: var(--aws-dark-alt);
+  background: var(--aws-orange-hover);
   transform: translateY(-1px);
 }
 
@@ -637,9 +655,10 @@ main {
 }
 
 .rank-value {
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-weight: 800;
   color: var(--text-primary);
+  line-height: 1.2;
 }
 
 .result-actions {
