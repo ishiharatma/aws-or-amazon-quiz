@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Box body -->
+  <rect x="12" y="38" width="76" height="52" rx="3" fill="#E8A020"/>
+  <!-- Box body shading right -->
+  <rect x="72" y="38" width="16" height="52" rx="0" fill="#C8840C" rx="3"/>
+  <!-- Box top left flap -->
+  <rect x="12" y="25" width="35" height="15" rx="2" fill="#F0B030"/>
+  <!-- Box top right flap -->
+  <rect x="53" y="25" width="35" height="15" rx="2" fill="#D09820"/>
+  <!-- Tape strip vertical -->
+  <rect x="45" y="25" width="10" height="65" rx="1" fill="rgba(255,255,255,0.18)"/>
+  <!-- Amazon smile -->
+  <path d="M26 72 Q50 86 74 72" stroke="#FF9900" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <!-- Smile arrow tip -->
+  <path d="M69 68 L75 73 L69 78" stroke="#FF9900" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
