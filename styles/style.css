@@ -142,6 +142,20 @@ main {
   letter-spacing: -0.01em;
 }
 
+.header-version {
+  display: inline-block;
+  background: rgba(255, 153, 0, 0.18);
+  color: rgba(255, 153, 0, 0.85);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 0.15rem 0.45rem;
+  border-radius: 100px;
+  border: 1px solid rgba(255, 153, 0, 0.3);
+  margin-left: 0.5rem;
+  vertical-align: middle;
+}
+
 .header-controls {
   display: flex;
   gap: 0.5rem;
