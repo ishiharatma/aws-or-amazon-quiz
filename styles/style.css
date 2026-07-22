@@ -106,8 +106,18 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
+  padding: 1rem 1rem 0;
   line-height: 1.6;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding-bottom: 1rem;
 }
 
 /* ===== Header ===== */
@@ -426,12 +436,23 @@ body {
 .answer-result {
   border-top: 1px solid var(--border);
   padding: 1.25rem 1.5rem;
-  animation: slide-up 0.3s ease;
+  overflow: hidden;
+  max-height: 500px;
+  opacity: 1;
+  transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.25s ease,
+              padding 0.3s ease;
 }
 
-@keyframes slide-up {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
+/* Keep element in layout flow when hidden — collapses smoothly instead of jumping */
+.answer-result[hidden] {
+  display: block !important;
+  max-height: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  opacity: 0 !important;
+  border-top-color: transparent;
+  pointer-events: none;
 }
 
 .answer-result.correct {
@@ -613,6 +634,52 @@ body {
   color: var(--text-muted);
   padding: 0.75rem;
   border-top: 1px solid var(--border);
+}
+
+/* ===== Footer ===== */
+.site-footer {
+  width: 100%;
+  background: var(--aws-dark);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  margin-top: auto;
+  padding: 0.75rem 1.25rem;
+  text-align: center;
+}
+
+.site-footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.5);
+}
+
+.site-footer-copy {
+  white-space: nowrap;
+}
+
+.site-footer-sep {
+  opacity: 0.4;
+}
+
+.site-footer-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: rgba(255,255,255,0.6);
+  text-decoration: none;
+  transition: color var(--transition);
+  white-space: nowrap;
+}
+
+.site-footer-link:hover {
+  color: var(--aws-orange);
+}
+
+.site-footer-icon {
+  flex-shrink: 0;
 }
 
 /* ===== Responsive ===== */
