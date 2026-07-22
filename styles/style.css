@@ -673,6 +673,16 @@ main {
   flex-shrink: 0;
 }
 
+.site-footer-icon-link {
+  opacity: 0.7;
+  transition: opacity var(--transition), color var(--transition);
+}
+
+.site-footer-icon-link:hover {
+  opacity: 1;
+  color: rgba(255,255,255,0.9);
+}
+
 .site-footer-copy {
   font-size: 0.72rem;
   color: rgba(255,255,255,0.45);
