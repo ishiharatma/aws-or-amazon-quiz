@@ -2,8 +2,8 @@ import { Lang } from './types';
 
 const translations = {
   ja: {
-    title: 'Amazon or AWS ?',
-    subtitle: 'AWSサービスの正式名称を当てよう！',
+    title: 'AWS or Amazon ?',
+    subtitle: 'あなたはすべてを見分けられるか？！',
     start_btn: 'クイズ開始',
     question_label: '問',
     question_of: '/',
@@ -20,7 +20,7 @@ const translations = {
     rank_label: '評価',
     play_again: 'もう一度',
     share_on_x: 'Xでシェア',
-    share_text: 'Amazon or AWS Quiz で {score}/{total} ({pct}%) でした！あなたは？',
+    share_text: 'AWS or Amazon Quiz で {score}/{total} ({pct}%) でした！あなたは？',
     share_challenge: 'あなたもチャレンジ！',
     lang_toggle: 'EN',
     service_total: '全{count}サービス対応',
@@ -34,8 +34,8 @@ const translations = {
     },
   },
   en: {
-    title: 'Amazon or AWS ?',
-    subtitle: 'Can you tell if it\'s Amazon or AWS?',
+    title: 'AWS or Amazon ?',
+    subtitle: 'Can you tell them all apart?!',
     start_btn: 'Start Quiz',
     question_label: 'Question',
     question_of: '/',
@@ -52,7 +52,7 @@ const translations = {
     rank_label: 'Result',
     play_again: 'Play Again',
     share_on_x: 'Share on X',
-    share_text: 'I scored {score}/{total} ({pct}%) on Amazon or AWS Quiz!',
+    share_text: 'I scored {score}/{total} ({pct}%) on AWS or Amazon Quiz!',
     share_challenge: 'Can you beat me?',
     lang_toggle: 'JA',
     service_total: '{count} services',
