@@ -17,6 +17,8 @@ export function renderResult(state: QuizState, lang: Lang): void {
   const playAgainBtn = el.querySelector('#play-again-btn');
   const shareBtn = el.querySelector('#share-btn') as HTMLAnchorElement | null;
   const shareBtnText = el.querySelector('#share-btn span');
+  const shareLinkedinBtn = el.querySelector('#share-linkedin-btn') as HTMLAnchorElement | null;
+  const shareLinkedinBtnText = el.querySelector('#share-linkedin-btn span');
 
   if (resultTitleEl) resultTitleEl.textContent = t(lang, 'result_title');
   if (finalScoreEl) finalScoreEl.textContent = `${score} / ${total}`;
@@ -30,14 +32,24 @@ export function renderResult(state: QuizState, lang: Lang): void {
   }
   if (playAgainBtn) playAgainBtn.textContent = t(lang, 'play_again');
   if (shareBtnText) shareBtnText.textContent = t(lang, 'share_on_x');
+  if (shareLinkedinBtnText) shareLinkedinBtnText.textContent = t(lang, 'share_on_linkedin');
+
+  const url = window.location.href.split('?')[0];
 
   if (shareBtn) {
     const shareText = tFormat(lang, 'share_text', { score, total, pct });
     const challenge = t(lang, 'share_challenge');
-    const url = window.location.href.split('?')[0];
     const tweet = `${shareText}\n${challenge}\n${url}`;
     shareBtn.href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweet)}`;
     shareBtn.target = '_blank';
     shareBtn.rel = 'noopener noreferrer';
+  }
+
+  if (shareLinkedinBtn) {
+    // LinkedIn's share intent only accepts a URL; it pulls title/description
+    // from the page's OGP tags rather than a custom text param.
+    shareLinkedinBtn.href = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
+    shareLinkedinBtn.target = '_blank';
+    shareLinkedinBtn.rel = 'noopener noreferrer';
   }
 }

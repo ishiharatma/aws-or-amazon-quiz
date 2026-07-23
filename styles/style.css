@@ -712,6 +712,31 @@ main {
   font-style: normal;
 }
 
+#share-linkedin-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: #0a66c2;
+  color: #fff;
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 0.875rem;
+  min-height: 52px;
+  transition: background var(--transition), transform var(--transition);
+}
+
+#share-linkedin-btn:hover {
+  background: #004182;
+  transform: translateY(-1px);
+}
+
+.linkedin-icon {
+  display: block;
+}
+
 /* ===== Keyboard hints ===== */
 .keyboard-hint {
   text-align: center;
