@@ -45,6 +45,10 @@ function updateStaticTexts(): void {
       tFormat(lang, 'service_total', { count: allServices.length });
   }
 
+  ($('.meta-questions', startEl) as HTMLElement).textContent = t(lang, 'meta_questions');
+  ($('.meta-keyboard', startEl) as HTMLElement).textContent = t(lang, 'meta_keyboard');
+  ($('.meta-bilingual', startEl) as HTMLElement).textContent = t(lang, 'meta_bilingual');
+
   const linkTextEl = $('.service-link-text', quizEl) as HTMLElement | null;
   if (linkTextEl) linkTextEl.textContent = t(lang, 'service_page');
 }

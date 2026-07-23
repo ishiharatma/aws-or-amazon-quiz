@@ -25,6 +25,9 @@ const translations = {
     lang_toggle: 'EN',
     service_total: '{count}サービスから出題',
     service_page: 'AWS公式ページ',
+    meta_questions: '20問',
+    meta_keyboard: 'キーボード対応',
+    meta_bilingual: '日本語 / English',
     ranks: {
       legend: 'AWS Naming Legend',
       master: 'AWS Naming Master',
@@ -57,6 +60,9 @@ const translations = {
     lang_toggle: 'JA',
     service_total: 'Questions drawn from {count} services',
     service_page: 'AWS Service Page',
+    meta_questions: '20 Questions',
+    meta_keyboard: 'Keyboard Support',
+    meta_bilingual: '日本語 / English',
     ranks: {
       legend: 'AWS Naming Legend',
       master: 'AWS Naming Master',

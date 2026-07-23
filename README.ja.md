@@ -9,7 +9,7 @@ AWSサービスの正式名称プレフィックスを当てるブラウザク�
 
 [![今すぐプレイ](https://img.shields.io/badge/▶%20今すぐプレイ-GitHub%20Pages-FF9900?style=for-the-badge&labelColor=232F3E)](https://ishiharatma.github.io/aws-or-amazon-quiz/)
 &nbsp;
-[![Version](https://img.shields.io/badge/version-v1.7-blue?style=for-the-badge&labelColor=232F3E)](CHANGELOG)
+[![Version](https://img.shields.io/badge/version-v1.8-blue?style=for-the-badge&labelColor=232F3E)](CHANGELOG)
 &nbsp;
 [![License: MIT](https://img.shields.io/badge/license-MIT-green?style=for-the-badge&labelColor=232F3E)](LICENSE)
 
@@ -97,7 +97,7 @@ AWSのサービス名には **Amazon** か **AWS** どちらかのプレフィ�
 
 ## ✨ 特徴
 
-- **94のAWSサービス** — その中からランダムに20問を出題
+- **150のAWSサービス** — その中からランダムに20問を出題
 - **日英バイリンガル対応** 🇯🇵🇺🇸 — ブラウザの言語設定で自動切り替え、画面右上のボタンで手動切替も可
 - **解説付き** — 回答後に各サービスの概要説明を表示
 - **連続正解カウンター** — 連続正解数を「🔥 N問連続正解！」で表示

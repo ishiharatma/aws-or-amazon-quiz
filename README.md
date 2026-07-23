@@ -9,7 +9,7 @@ A browser quiz game that tests your knowledge of official AWS service names.
 
 [![Play Now](https://img.shields.io/badge/▶%20Play%20Now-GitHub%20Pages-FF9900?style=for-the-badge&labelColor=232F3E)](https://ishiharatma.github.io/aws-or-amazon-quiz/)
 &nbsp;
-[![Version](https://img.shields.io/badge/version-v1.7-blue?style=for-the-badge&labelColor=232F3E)](CHANGELOG)
+[![Version](https://img.shields.io/badge/version-v1.8-blue?style=for-the-badge&labelColor=232F3E)](CHANGELOG)
 &nbsp;
 [![License: MIT](https://img.shields.io/badge/license-MIT-green?style=for-the-badge&labelColor=232F3E)](LICENSE)
 
@@ -96,7 +96,7 @@ This quiz game challenges you to pick the correct prefix for 20 randomly selecte
 
 ## ✨ Features
 
-- **94 AWS services** in the question pool — 20 randomly selected every game
+- **150 AWS services** in the question pool — 20 randomly selected every game
 - **Bilingual** — Japanese 🇯🇵 and English 🇺🇸, auto-detected from browser language
 - **Service descriptions** after every answer so you actually learn
 - **Streak counter** — tracks consecutive correct answers
