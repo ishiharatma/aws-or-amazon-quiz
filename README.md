@@ -1,17 +1,17 @@
 <div align="center">
 
-<img src="https://img.shields.io/badge/Amazon%20or%20AWS%20%3F-Quiz%20Game-FF9900?style=for-the-badge&labelColor=232F3E" alt="Amazon or AWS Quiz" />
+<img src="https://img.shields.io/badge/AWS%20or%20Amazon%20%3F-Quiz%20Game-FF9900?style=for-the-badge&labelColor=232F3E" alt="AWS or Amazon Quiz" />
 
-# Amazon or AWS ?
+# AWS or Amazon ?
 
-**Can you tell if it's Amazon or AWS?**  
+**Can you tell them all apart?!**  
 A browser quiz game that tests your knowledge of official AWS service names.
 
 [![Play Now](https://img.shields.io/badge/▶%20Play%20Now-GitHub%20Pages-FF9900?style=for-the-badge&labelColor=232F3E)](https://ishiharatma.github.io/aws-or-amazon-quiz/)
 &nbsp;
-[![Version](https://img.shields.io/badge/version-v1.7-blue?style=flat-square)](CHANGELOG)
+[![Version](https://img.shields.io/badge/version-v1.7-blue?style=for-the-badge&labelColor=232F3E)](CHANGELOG)
 &nbsp;
-[![License: MIT](https://img.shields.io/badge/license-MIT-green?style=flat-square)](LICENSE)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green?style=for-the-badge&labelColor=232F3E)](LICENSE)
 
 *Read this in other languages:*
 [![🇯🇵 日本語](https://img.shields.io/badge/%F0%9F%87%AF%F0%9F%87%B5-日本語-white)](./README.ja.md)
@@ -40,75 +40,21 @@ This quiz game challenges you to pick the correct prefix for 20 randomly selecte
 
 **Start Screen**
 
-```
-┌─────────────────────────┐
-│  Amazon or AWS ?  v1.7  │  ← Header
-├─────────────────────────┤
-│                         │
-│      Quiz Game          │
-│                         │
-│   Amazon or AWS ?       │
-│  Test your AWS names!   │
-│                         │
-│  📝 20 questions        │
-│  ⌨️  Keyboard support   │
-│  🌐 EN / JA             │
-│                         │
-│   [ Start Quiz ]        │
-└─────────────────────────┘
-```
+<img src="docs/screenshots/start_en.png" width="260" alt="Start screen" />
 
 </td>
 <td align="center" width="33%">
 
 **Quiz Screen**
 
-```
-┌─────────────────────────┐
-│  Amazon or AWS ?  v1.7  │
-├─────────────────────────┤
-│ Q 5/20   Score: 4/4     │
-│ ████░░░░░░░░░░░░░░░░░░  │
-│ 🔥 4 correct in a row!  │
-│                         │
-│         ⚡              │
-│       Lambda            │
-│  What's the full name?  │
-│                         │
-│  [  Amazon  ] [ AWS  ]  │
-│                         │
-│  ✓ Correct!             │
-│  AWS Lambda             │  ← Answer
-│  Run code without ...   │
-│          [ Next › ]     │  ← Orange btn
-└─────────────────────────┘
-```
+<img src="docs/screenshots/quiz_en.png" width="260" alt="Quiz screen" />
 
 </td>
 <td align="center" width="33%">
 
 **Result Screen**
 
-```
-┌─────────────────────────┐
-│  Amazon or AWS ?  v1.7  │
-├─────────────────────────┤
-│                         │
-│     Quiz Finished!      │
-│                         │
-│         Score           │
-│        18 / 20          │
-│                         │
-│  ┌──────────┬────────┐  │
-│  │ Accuracy │ Result │  │
-│  │   90%    │Well    │  │
-│  │          │Done!   │  │
-│  └──────────┴────────┘  │
-│                         │
-│  [ Play Again ]         │
-│  [ 𝕏 Share on X ]      │
-└─────────────────────────┘
-```
+<img src="docs/screenshots/result_en.png" width="260" alt="Result screen" />
 
 </td>
 </tr>
@@ -129,8 +75,9 @@ This quiz game challenges you to pick the correct prefix for 20 randomly selecte
 
 | Key | Action |
 |---|---|
-| `1` or `A` | Select "Amazon" |
-| `2` or `W` | Select "AWS" |
+| `A` | Select "Amazon" |
+| `W` | Select "AWS" |
+| `1` / `2` | Select the left / right button (order is randomized each question) |
 | `Enter` / `Space` | Go to next question |
 
 ---
@@ -149,7 +96,7 @@ This quiz game challenges you to pick the correct prefix for 20 randomly selecte
 
 ## ✨ Features
 
-- **70+ AWS services** in the question pool — randomized every game
+- **94 AWS services** in the question pool — 20 randomly selected every game
 - **Bilingual** — Japanese 🇯🇵 and English 🇺🇸, auto-detected from browser language
 - **Service descriptions** after every answer so you actually learn
 - **Streak counter** — tracks consecutive correct answers

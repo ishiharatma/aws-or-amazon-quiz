@@ -1,17 +1,17 @@
 <div align="center">
 
-<img src="https://img.shields.io/badge/Amazon%20or%20AWS%20%3F-クイズゲーム-FF9900?style=for-the-badge&labelColor=232F3E" alt="Amazon or AWS Quiz" />
+<img src="https://img.shields.io/badge/AWS%20or%20Amazon%20%3F-クイズゲーム-FF9900?style=for-the-badge&labelColor=232F3E" alt="AWS or Amazon Quiz" />
 
-# Amazon or AWS ?
+# AWS or Amazon ?
 
-**あのサービスは Amazon？それとも AWS？**  
+**あなたはすべてを見分けられるか？！**  
 AWSサービスの正式名称プレフィックスを当てるブラウザクイズゲームです。
 
 [![今すぐプレイ](https://img.shields.io/badge/▶%20今すぐプレイ-GitHub%20Pages-FF9900?style=for-the-badge&labelColor=232F3E)](https://ishiharatma.github.io/aws-or-amazon-quiz/)
 &nbsp;
-[![Version](https://img.shields.io/badge/version-v1.7-blue?style=flat-square)](CHANGELOG)
+[![Version](https://img.shields.io/badge/version-v1.7-blue?style=for-the-badge&labelColor=232F3E)](CHANGELOG)
 &nbsp;
-[![License: MIT](https://img.shields.io/badge/license-MIT-green?style=flat-square)](LICENSE)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green?style=for-the-badge&labelColor=232F3E)](LICENSE)
 
 *他の言語で読む:*
 [![🇯🇵 日本語](https://img.shields.io/badge/%F0%9F%87%AF%F0%9F%87%B5-日本語-white)](./README.ja.md)
@@ -41,77 +41,21 @@ AWSのサービス名には **Amazon** か **AWS** どちらかのプレフィ�
 
 **スタート画面**
 
-```
-┌─────────────────────────┐
-│  Amazon or AWS ?  v1.7  │  ← ヘッダー
-├─────────────────────────┤
-│                         │
-│      Quiz Game          │
-│                         │
-│   Amazon or AWS ?       │
-│  AWSサービスの正式名称  │
-│     を当てよう！        │
-│                         │
-│  📝 20問                │
-│  ⌨️  キーボード対応     │
-│  🌐 日本語 / English    │
-│                         │
-│   [ クイズ開始 ]        │
-└─────────────────────────┘
-```
+<img src="docs/screenshots/start_ja.png" width="260" alt="スタート画面" />
 
 </td>
 <td align="center" width="33%">
 
 **クイズ画面**
 
-```
-┌─────────────────────────┐
-│  Amazon or AWS ?  v1.7  │
-├─────────────────────────┤
-│ 問 5/20  スコア: 4/4    │
-│ ████░░░░░░░░░░░░░░░░░░  │
-│ 🔥 4問連続正解！        │
-│                         │
-│         ⚡              │
-│       Lambda            │
-│  このサービスの正式      │
-│    名称は？             │
-│  [  Amazon  ] [ AWS  ]  │
-│                         │
-│  ✓ 正解！               │
-│  AWS Lambda             │  ← 解説
-│  サーバーレスコンピュー  │
-│  ティングサービス...    │
-│        [ 次へ › ]       │  ← オレンジボタン
-└─────────────────────────┘
-```
+<img src="docs/screenshots/quiz_ja.png" width="260" alt="クイズ画面" />
 
 </td>
 <td align="center" width="33%">
 
 **結果画面**
 
-```
-┌─────────────────────────┐
-│  Amazon or AWS ?  v1.7  │
-├─────────────────────────┤
-│                         │
-│     クイズ終了！        │
-│                         │
-│         Score           │
-│        18 / 20          │
-│                         │
-│  ┌──────────┬────────┐  │
-│  │ 正答率   │ 評価   │  │
-│  │   90%    │なかなか│  │
-│  │          │いい！  │  │
-│  └──────────┴────────┘  │
-│                         │
-│  [ もう一度 ]           │
-│  [ 𝕏 Xでシェア ]       │
-└─────────────────────────┘
-```
+<img src="docs/screenshots/result_ja.png" width="260" alt="結果画面" />
 
 </td>
 </tr>
@@ -132,8 +76,9 @@ AWSのサービス名には **Amazon** か **AWS** どちらかのプレフィ�
 
 | キー | 操作 |
 |---|---|
-| `1` または `A` | 「Amazon」を選択 |
-| `2` または `W` | 「AWS」を選択 |
+| `A` | 「Amazon」を選択 |
+| `W` | 「AWS」を選択 |
+| `1` / `2` | 左/右のボタンを選択（表示順は毎回ランダム） |
 | `Enter` / `Space` | 次の問題へ |
 
 ---
@@ -152,7 +97,7 @@ AWSのサービス名には **Amazon** か **AWS** どちらかのプレフィ�
 
 ## ✨ 特徴
 
-- **70問以上のAWSサービス** — 毎回ランダムに20問を出題
+- **94のAWSサービス** — その中からランダムに20問を出題
 - **日英バイリンガル対応** 🇯🇵🇺🇸 — ブラウザの言語設定で自動切り替え、画面右上のボタンで手動切替も可
 - **解説付き** — 回答後に各サービスの概要説明を表示
 - **連続正解カウンター** — 連続正解数を「🔥 N問連続正解！」で表示
